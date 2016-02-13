@@ -38,3 +38,6 @@ platforms
 
 # Webpack bundle
 www/bundle.js
+
+.DS_Store
+**/*/.DS_Store
