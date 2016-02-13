@@ -1,0 +1,26 @@
+.play-button {
+	display: block;
+	box-sizing: border-box;
+	width: 64px;
+	height: 64px;
+	background: #e6e6e6;
+	border-radius: 50%;
+	padding: 16px 16px;
+}
+
+.play-button .arrow-right {
+	width: 0;
+	height: 0;
+	margin-left: 8px;
+	border-top: 16px solid transparent;
+	border-bottom: 16px solid transparent;
+	border-left: 24px solid #333333;
+}
+
+.play-button.Tappable-active {
+	background: #efefef;
+}
+
+.play-button.Tappable-active .arrow-right {
+	border-left: 24px solid #666666;
+}
