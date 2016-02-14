@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import Tappable from 'react-tappable';
+import MdPlayArrow from 'react-icons/lib/md/play-arrow';
 
 import './playbutton.css';
 
@@ -16,8 +17,8 @@ export default React.createClass({
 
 		return (
 				<div>
-					<Tappable className={ cx } href="#">
-						<div className='arrow-right' />
+					<Tappable className={ cx } component='a' classBase='tappable'>
+						<MdPlayArrow size="48" />
 					</Tappable>
 				</div>
 		);

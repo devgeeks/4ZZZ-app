@@ -16,5 +16,5 @@ export default React.createClass({
 		return (
 			<div />
 		);
-	}
+	},
 });

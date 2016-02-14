@@ -1,4 +1,4 @@
-.play-button {
+.stop-button {
 	display: block;
 	box-sizing: border-box;
 	width: 64px;
@@ -8,14 +8,14 @@
 	padding: 8px;
 }
 
-.play-button.tappable-active {
+.stop-button.tappable-active {
 	background: #efefef;
 }
 
-.play-button svg {
+.stop-button svg {
   fill: #222222;
 }
 
-.play-button.tappable-active svg {
+.stop-button.tappable-active svg {
   fill: #666666;
 }
