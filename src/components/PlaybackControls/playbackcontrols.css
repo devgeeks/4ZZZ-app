@@ -1,0 +1,22 @@
+.playback-controls {
+	position: absolute;
+	right: 16px;
+	bottom: 16px;
+	box-sizing: border-box;
+	width: 64px;
+	height: 64px;
+	padding: 8px;
+	border-radius: 50%;
+	background: #efefef;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	-webkit-transition: all .25s ease-in-out;
+	        transition: all .25s ease-in-out;
+}
+
+.playback-controls.is-playing {
+	border-radius: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	box-shadow: none;
+}

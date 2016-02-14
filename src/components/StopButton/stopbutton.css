@@ -1,15 +1,6 @@
 .stop-button {
-	display: block;
+	display: inline-block;
 	box-sizing: border-box;
-	width: 64px;
-	height: 64px;
-	background: #e6e6e6;
-	border-radius: 50%;
-	padding: 8px;
-}
-
-.stop-button.tappable-active {
-	background: #efefef;
 }
 
 .stop-button svg {

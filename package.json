@@ -32,6 +32,7 @@
     "ios": "cordova run ios",
     "prepare": "node config && webpack && cordova prepare",
     "build": "node config && webpack && cordova build",
+    "prod": "NODE_ENV=production node config && webpack -p && cordova build",
     "start": "node config && HOST=0.0.0.0 webpack-dev-server",
     "test": "echo \"No tests (yet!) -- submit a PR?\" && exit 0"
   },

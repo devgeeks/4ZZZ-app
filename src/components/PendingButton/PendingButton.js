@@ -1,24 +1,24 @@
 import React from 'react';
 import classNames from 'classnames';
+import FaSpinner from 'react-icons/lib/fa/circle-o-notch';
 import Tappable from 'react-tappable';
-import MdStop from 'react-icons/lib/md/stop';
 
-import './stopbutton.css';
+import './pendingbutton.css';
 
 export default React.createClass({
 
-	displayName: 'StopButton',
+	displayName: 'PendingButton',
 
 	render() {
 
 		const cx = classNames({
-			'stop-button': true,
+			'pending-button': true,
 		});
 
 		return (
 			<div>
 				<Tappable className={ cx } component="a" classBase="tappable">
-					<MdStop size="48" />
+					<FaSpinner size="32" />
 				</Tappable>
 			</div>
 		);

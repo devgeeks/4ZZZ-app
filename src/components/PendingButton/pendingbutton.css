@@ -1,0 +1,39 @@
+.pending-button {
+	box-sizing: border-box;
+	display: inline-block;
+	padding: 8px;
+	box-sizing: border-box;
+	-webkit-transform: rotate(33deg);
+	transform: rotate(33deg);
+	-webkit-animation: rotating 750ms ease-in-out infinite;
+					animation: rotating 750ms ease-in-out infinite;
+}
+
+.pending-button svg {
+  fill: #666666;
+}
+
+.pending-button.tappable-active svg {
+  fill: #999999;
+}
+
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(33deg);
+    transform: rotate(33deg);
+  }
+  to {
+    -webkit-transform: rotate(393deg);
+    transform: rotate(393deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -webkit-transform: rotate(33deg);
+    transform: rotate(33deg);
+  }
+  to {
+    -webkit-transform: rotate(393deg);
+    transform: rotate(393deg);
+  }
+}

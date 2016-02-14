@@ -17,7 +17,7 @@ export default React.createClass({
 
 		return (
 				<div>
-					<Tappable className={ cx } component='a' classBase='tappable'>
+					<Tappable className={ cx } component="a" classBase="tappable">
 						<MdPlayArrow size="48" />
 					</Tappable>
 				</div>

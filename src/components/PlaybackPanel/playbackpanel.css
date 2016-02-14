@@ -1,0 +1,30 @@
+.playback-panel {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+}
+
+.routetransition-enter .playback-panel {
+  transform: scale(0.9, 0.9);
+  opacity: 0.01;
+}
+
+.routetransition-enter.routetransition-enter-active .playback-panel {
+  transform: scale(1, 1);
+  opacity: 1;
+  transition: all .25s ease-in-out;
+}
+
+.routetransition-leave .playback-panel {
+  transform: scale(1, 1);
+  opacity: 1;
+  transition: all .25s ease-in-out;
+}
+
+.routetransition-leave.routetransition-leave-active .playback-panel {
+  transform: scale(0.9, 0.9);
+  opacity: 0.01;
+}
