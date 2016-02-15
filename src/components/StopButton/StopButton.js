@@ -10,7 +10,7 @@ export default React.createClass({
   displayName: 'StopButton',
 
   propTypes: {
-    handleClick: React.PropTypes.function,
+    handleClick: React.PropTypes.func.isRequired,
   },
 
   clickHandler() {

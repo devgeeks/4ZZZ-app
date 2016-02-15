@@ -56,7 +56,7 @@ export default React.createClass({
     const { nowPlaying } = this.props;
     const { isPending, isPlaying } = this.state;
 
-    let button;
+    let button = <PlayButton handleClick={ this.handlePlaybackControlAction } />;
     if (isPlaying && isPending) {
       button = <PendingButton handleClick={ this.handlePlaybackControlAction } />;
     } else if (isPlaying) {

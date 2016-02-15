@@ -8,7 +8,7 @@ export default React.createClass({
   displayName: 'PlaybackControls',
 
   propTypes: {
-    children: React.PropTypes.object,
+    children: React.PropTypes.any,
     isPlaying: React.PropTypes.bool,
   },
 

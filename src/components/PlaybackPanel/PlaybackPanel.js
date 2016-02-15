@@ -8,7 +8,7 @@ export default React.createClass({
   displayName: 'PlaybackPanel',
 
   propTypes: {
-    children: React.PropTypes.object,
+    children: React.PropTypes.array,
   },
 
   render() {
