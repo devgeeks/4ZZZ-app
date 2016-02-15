@@ -1,12 +1,12 @@
 .pending-button {
-	box-sizing: border-box;
-	display: inline-block;
-	padding: 8px;
-	box-sizing: border-box;
-	-webkit-transform: rotate(33deg);
-	transform: rotate(33deg);
-	-webkit-animation: rotating 750ms ease-in-out infinite;
-					animation: rotating 750ms ease-in-out infinite;
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 4px;
+  box-sizing: border-box;
+  -webkit-transform: rotate(33deg);
+  transform: rotate(33deg);
+  -webkit-animation: rotating 750ms ease-in-out infinite;
+          animation: rotating 750ms ease-in-out infinite;
 }
 
 .pending-button svg {

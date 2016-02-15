@@ -7,20 +7,30 @@ import './playbutton.css';
 
 export default React.createClass({
 
-	displayName: 'PlayButton',
+  displayName: 'PlayButton',
 
-	render() {
+  propTypes: {
+    handleClick: React.PropTypes.function,
+  },
 
-		const cx = classNames({
-			'play-button': true,
-		});
+  clickHandler() {
+    const { handleClick } = this.props;
+    handleClick('play');
+  },
 
-		return (
-				<div>
-					<Tappable className={ cx } component="a" classBase="tappable">
-						<MdPlayArrow size="48" />
-					</Tappable>
-				</div>
-		);
-	},
+  render() {
+    const cx = classNames({
+      'play-button': true,
+    });
+
+    return (
+        <div>
+          <Tappable className={ cx } component="a" classBase="tappable"
+            onTap={ this.clickHandler }
+          >
+            <MdPlayArrow size="32" />
+          </Tappable>
+        </div>
+    );
+  },
 });

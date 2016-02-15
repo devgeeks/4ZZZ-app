@@ -5,18 +5,21 @@ import './playbackpanel.css';
 
 export default React.createClass({
 
-	displayName: 'PlaybackPanel',
+  displayName: 'PlaybackPanel',
 
-	render() {
+  propTypes: {
+    children: React.PropTypes.object,
+  },
 
-		const cx = classNames({
-			'playback-panel': true
-		});
+  render() {
+    const cx = classNames({
+      'playback-panel': true,
+    });
 
-		return (
-			<div className={ cx }>
-				{ this.props.children }
-			</div>
-		);
-	}
+    return (
+      <div className={ cx }>
+        { this.props.children }
+      </div>
+    );
+  },
 });

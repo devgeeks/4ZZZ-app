@@ -9,32 +9,69 @@ import PendingButton from '../../components/PendingButton';
 
 export default React.createClass({
 
-	displayName: 'PlayView',
+  displayName: 'PlayView',
 
-	getInitialState: function() {
-		return {
-			isPending: false,
-			isPlaying: false,
-			nowPlaying: {},
-		};
-	},
+  propTypes: {
+    nowPlaying: React.PropTypes.bool,
+  },
 
-	render: function() {
+  getInitialState() {
+    return {
+      isPending: false,
+      isPlaying: false,
+      nowPlaying: {},
+    };
+  },
 
-		const { nowPlaying } = this.props;
-		const { isPending, isPlaying } = this.state;
+  handlePlaybackControlAction(type) {
+    let tmpTimer;
+    switch (type) {
+      case 'play':
+        console.log('pending');
+        this.setState({
+          isPlaying: true,
+          isPending: true,
+        });
+        tmpTimer = setTimeout(() => {
+          console.log('playing');
+          this.setState({
+            isPlaying: true,
+            isPending: false,
+          });
+        }, 2000);
+        break;
+      case 'pending':
+      case 'stop':
+      default:
+        console.log('stopping');
+        clearTimeout(tmpTimer);
+        this.setState({
+          isPending: false,
+          isPlaying: false,
+        });
+    }
+  },
 
-		const button = isPlaying
-			? (isPending ? <PendingButton /> : <StopButton />)
-			: <PlayButton />;
+  render() {
+    const { nowPlaying } = this.props;
+    const { isPending, isPlaying } = this.state;
 
-		return (
-			<PlaybackPanel>
-				<NowPlaying nowPlaying={ nowPlaying } />
-				<PlaybackControls isPlaying={ isPlaying }>
-					{ button }
-				</PlaybackControls>
-			</PlaybackPanel>
-		);
-	},
+    let button;
+    if (isPlaying && isPending) {
+      button = <PendingButton handleClick={ this.handlePlaybackControlAction } />;
+    } else if (isPlaying) {
+      button = <StopButton handleClick={ this.handlePlaybackControlAction } />;
+    } else {
+      button = <PlayButton handleClick={ this.handlePlaybackControlAction } />;
+    }
+
+    return (
+      <PlaybackPanel>
+        <NowPlaying nowPlaying={ nowPlaying } />
+        <PlaybackControls isPlaying={ isPlaying }>
+          { button }
+        </PlaybackControls>
+      </PlaybackPanel>
+    );
+  },
 });

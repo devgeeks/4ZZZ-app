@@ -5,16 +5,15 @@ import './nowplaying.css';
 
 export default React.createClass({
 
-	displayName: 'NowPlaying',
+  displayName: 'NowPlaying',
 
-	render() {
+  render() {
+    const cx = classNames({
+      'now-playing': true,
+    });
 
-		const cx = classNames({
-			'now-playing': true
-		});
-
-		return (
-			<div />
-		);
-	},
+    return (
+      <div className={ cx } />
+    );
+  },
 });

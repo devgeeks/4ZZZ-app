@@ -9,28 +9,33 @@ import PlayView from './containers/PlayView';
 import './index.css';
 
 const App = React.createClass({
-	render() {
+  propTypes: {
+    children: React.PropTypes.object,
+    location: React.PropTypes.object,
+  },
 
-		const key = this.props.location.pathname;
+  render() {
+    const key = this.props.location.pathname;
 
-		return (
-			<div className="app">
-				<CSSTransitionGroup
-						transitionEnterTimeout={ 250 }
-						transitionLeaveTimeout={ 250 }
-						transitionName="routetransition">
-					{ React.cloneElement(this.props.children || <div />, { key: key }) }
-				</CSSTransitionGroup>
-			</div>
-		);
-	},
+    return (
+      <div className="app">
+        <CSSTransitionGroup
+          transitionEnterTimeout={ 250 }
+          transitionLeaveTimeout={ 250 }
+          transitionName="routetransition"
+        >
+          { React.cloneElement(this.props.children || <div />, { key }) }
+        </CSSTransitionGroup>
+      </div>
+    );
+  },
 });
 
 ReactDOM.render((
-	<Router history={ hashHistory }>
-		<Route component={ App }>
-			<Route path="play" component={ PlayView } />
-			<Redirect from="/" to="/play" />
-		</Route>
-	</Router>
+  <Router history={ hashHistory }>
+    <Route component={ App }>
+      <Route path="play" component={ PlayView } />
+      <Redirect from="/" to="/play" />
+    </Route>
+  </Router>
 ), document.getElementById('app'));

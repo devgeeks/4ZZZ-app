@@ -7,20 +7,30 @@ import './stopbutton.css';
 
 export default React.createClass({
 
-	displayName: 'StopButton',
+  displayName: 'StopButton',
 
-	render() {
+  propTypes: {
+    handleClick: React.PropTypes.function,
+  },
 
-		const cx = classNames({
-			'stop-button': true,
-		});
+  clickHandler() {
+    const { handleClick } = this.props;
+    handleClick('stop');
+  },
 
-		return (
-			<div>
-				<Tappable className={ cx } component="a" classBase="tappable">
-					<MdStop size="48" />
-				</Tappable>
-			</div>
-		);
-	},
+  render() {
+    const cx = classNames({
+      'stop-button': true,
+    });
+
+    return (
+      <div>
+        <Tappable className={ cx } component="a" classBase="tappable"
+          onTap={ this.clickHandler }
+        >
+          <MdStop size="32" />
+        </Tappable>
+      </div>
+    );
+  },
 });

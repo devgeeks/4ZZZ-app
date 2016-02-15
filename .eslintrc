@@ -1,17 +1,11 @@
 {
-	"ecmaFeatures": {
-		"jsx": true,
-		"modules": true,
-	},
-	"env": {
-		"browser": true,
-		"node": true,
-		"es6": true,
-	},
-	"rules": {
-		"quotes": [
-			2,
-			"single",
-		]
-	}
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "ecmaFeatures": {
+    "experimentalObjectRestSpread": true,
+  },
+  "rules": {
+    "no-console": 0,
+    "react/prefer-es6-class": 0,
+  }
 }

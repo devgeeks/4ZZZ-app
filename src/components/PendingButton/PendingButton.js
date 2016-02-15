@@ -7,20 +7,30 @@ import './pendingbutton.css';
 
 export default React.createClass({
 
-	displayName: 'PendingButton',
+  displayName: 'PendingButton',
 
-	render() {
+  propTypes: {
+    handleClick: React.PropTypes.function,
+  },
 
-		const cx = classNames({
-			'pending-button': true,
-		});
+  clickHandler() {
+    const { handleClick } = this.props;
+    handleClick('stop');
+  },
 
-		return (
-			<div>
-				<Tappable className={ cx } component="a" classBase="tappable">
-					<FaSpinner size="32" />
-				</Tappable>
-			</div>
-		);
-	},
+  render() {
+    const cx = classNames({
+      'pending-button': true,
+    });
+
+    return (
+      <div>
+        <Tappable className={ cx } component="a" classBase="tappable"
+          onTap={ this.clickHandler }
+        >
+          <FaSpinner size="24" />
+        </Tappable>
+      </div>
+    );
+  },
 });
