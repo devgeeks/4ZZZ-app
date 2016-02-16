@@ -24,7 +24,6 @@ export default React.createClass({
   },
 
   handlePlaybackControlAction(type) {
-    let tmpTimer;
     switch (type) {
       case 'play':
         console.log('pending');
@@ -32,19 +31,20 @@ export default React.createClass({
           isPlaying: true,
           isPending: true,
         });
-        tmpTimer = setTimeout(() => {
-          console.log('playing');
-          this.setState({
-            isPlaying: true,
-            isPending: false,
-          });
+        setTimeout(() => {
+          if (this.state.isPlaying) {
+            console.log('playing');
+            this.setState({
+              isPlaying: true,
+              isPending: false,
+            });
+          }
         }, 2000);
         break;
       case 'pending':
       case 'stop':
       default:
         console.log('stopping');
-        clearTimeout(tmpTimer);
         this.setState({
           isPending: false,
           isPlaying: false,

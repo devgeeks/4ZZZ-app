@@ -28,7 +28,7 @@ export default React.createClass({
           <Tappable className={ cx } component="a" classBase="tappable"
             onTap={ this.clickHandler }
           >
-            <MdPlayArrow size="32" />
+            <MdPlayArrow size="40" />
           </Tappable>
         </div>
     );

@@ -28,7 +28,7 @@ export default React.createClass({
         <Tappable className={ cx } component="a" classBase="tappable"
           onTap={ this.clickHandler }
         >
-          <FaSpinner size="24" />
+          <FaSpinner size="32" />
         </Tappable>
       </div>
     );

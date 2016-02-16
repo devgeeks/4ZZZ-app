@@ -1,22 +1,23 @@
 .playback-controls {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
   box-sizing: border-box;
-  width: 56px;
-  height: 56px;
+  position: absolute;
+  right: 32px;
+  bottom: 32px;
+  box-sizing: border-box;
+  width: 64px;
+  height: 64px;
   padding: 12px;
   border-radius: 50%;
   background: #efefef;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  -webkit-transition: all .25s ease-in-out;
-          transition: all .25s ease-in-out;
+  transition: width .1s linear .1s, right .3s ease-out, bottom .1s ease-out,
+    box-shadow .1s linear, border-radius .1s ease-out .2s;
 }
 
 .playback-controls.is-playing {
   border-radius: 0;
+  width: 100%;
   right: 0;
   bottom: 0;
-  width: 100%;
   box-shadow: none;
 }
