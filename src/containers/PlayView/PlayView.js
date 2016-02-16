@@ -56,20 +56,22 @@ export default React.createClass({
     const { nowPlaying } = this.props;
     const { isPending, isPlaying } = this.state;
 
-    let button = <PlayButton handleClick={ this.handlePlaybackControlAction } />;
+    let controls = <PlayButton handleClick={ this.handlePlaybackControlAction } />;
     if (isPlaying && isPending) {
-      button = <PendingButton handleClick={ this.handlePlaybackControlAction } />;
+      controls = <PendingButton handleClick={ this.handlePlaybackControlAction } />;
     } else if (isPlaying) {
-      button = <StopButton handleClick={ this.handlePlaybackControlAction } />;
+      controls = (<StopButton handleClick={ this.handlePlaybackControlAction }>
+                  <span>00:00:00</span>
+                 </StopButton>);
     } else {
-      button = <PlayButton handleClick={ this.handlePlaybackControlAction } />;
+      controls = <PlayButton handleClick={ this.handlePlaybackControlAction } />;
     }
 
     return (
       <PlaybackPanel>
         <NowPlaying nowPlaying={ nowPlaying } />
         <PlaybackControls isPlaying={ isPlaying }>
-          { button }
+          { controls }
         </PlaybackControls>
       </PlaybackPanel>
     );
