@@ -10,6 +10,7 @@ export default React.createClass({
   displayName: 'PendingButton',
 
   propTypes: {
+    children: React.PropTypes.any,
     handleClick: React.PropTypes.func.isRequired,
   },
 
@@ -30,6 +31,7 @@ export default React.createClass({
         >
           <FaSpinner size="32" />
         </Tappable>
+        { this.props.children }
       </div>
     );
   },

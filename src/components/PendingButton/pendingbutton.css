@@ -2,15 +2,16 @@
   box-sizing: border-box;
   display: inline-block;
   padding: 4px;
+  margin-right: 8px;
   box-sizing: border-box;
-  -webkit-transform: rotate(33deg);
-  transform: rotate(33deg);
-  -webkit-animation: rotating 750ms ease-in-out infinite;
-          animation: rotating 750ms ease-in-out infinite;
 }
 
 .pending-button svg {
   fill: #666666;
+  -webkit-transform: rotate(33deg);
+  transform: rotate(33deg);
+  -webkit-animation: rotating 750ms ease-in-out infinite;
+          animation: rotating 750ms ease-in-out infinite;
 }
 
 .pending-button.tappable-active svg {
