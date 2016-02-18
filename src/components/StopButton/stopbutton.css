@@ -4,9 +4,14 @@
 }
 
 .stop-button svg {
-  fill: #222222;
+  fill: #13567b;
+}
+
+.stop-button.tappable-active {
+  -webkit-transform: scale(1.2, 1.2);
+          transform: scale(1.2, 1.2);
 }
 
 .stop-button.tappable-active svg {
-  fill: #666666;
+  fill: #1d84bd;
 }

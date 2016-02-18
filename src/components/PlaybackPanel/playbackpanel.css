@@ -5,6 +5,9 @@
   bottom: 0;
   left: 0;
   overflow: hidden;
+  background: url('images/4ZZZ_C_Blue.png') top no-repeat;
+  background-position: 0 -100px;
+  background-size: 100% auto;
 }
 
 .routetransition-enter .playback-panel {
