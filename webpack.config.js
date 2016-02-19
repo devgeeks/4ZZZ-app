@@ -16,6 +16,12 @@ const common = {
     path: PATHS.build,
     filename: 'bundle.js',
   },
+  resolve: {
+    alias: {
+      components: `${__dirname}/src/components/`,
+      containers: `${__dirname}/src/containers/`,
+    },
+  },
   module: {
     loaders: [
       {

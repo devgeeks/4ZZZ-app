@@ -1,33 +1,42 @@
-.playback-panel {
+.playback-pane {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   overflow: hidden;
-  background: url('images/4ZZZ_C_Blue.png') top no-repeat;
-  background-position: 0 -100px;
-  background-size: 100% auto;
 }
 
-.routetransition-enter .playback-panel {
+.playback-pane .bg {
+  background: url('images/4ZZZ_C_Blue.png') top no-repeat;
+  background-position: 0 -100px;
+  background-size: 100%;
+  max-width: 320px;
+  width: 100%;
+  height: 220px;
+  margin-left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+
+.routetransition-enter .playback-pane {
   transform: scale(0.9, 0.9);
   opacity: 0.01;
 }
 
-.routetransition-enter.routetransition-enter-active .playback-panel {
+.routetransition-enter.routetransition-enter-active .playback-pane {
   transform: scale(1, 1);
   opacity: 1;
   transition: all .25s ease-in-out;
 }
 
-.routetransition-leave .playback-panel {
+.routetransition-leave .playback-pane {
   transform: scale(1, 1);
   opacity: 1;
   transition: all .25s ease-in-out;
 }
 
-.routetransition-leave.routetransition-leave-active .playback-panel {
+.routetransition-leave.routetransition-leave-active .playback-pane {
   transform: scale(0.9, 0.9);
   opacity: 0.01;
 }

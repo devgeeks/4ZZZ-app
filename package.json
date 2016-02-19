@@ -1,9 +1,9 @@
 {
-  "name": "phonegap-template-react-hot-loader",
-  "version": "1.0.0",
-  "description": "Template Example for using React, ES2015, Webpack, and hot loading in a PhoneGap App",
+  "name": "4ZZZfm-app",
+  "version": "4.0.0",
+  "description": "4ZZZfm mobile app updated for 2016",
   "main": "src/index.js",
-  "repository": "https://github.com/PhoneGap/phonegap-template-react-hot-loader.git",
+  "repository": "https://github.com/4ZZZfm-app.git",
   "dependencies": {
     "babel-core": "^6.4.5",
     "babel-loader": "^6.2.1",
@@ -27,6 +27,9 @@
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^5.0.1",
     "eslint-plugin-react": "^3.16.1",
+    "expect": "^1.14.0",
+    "jsdom": "^8.0.4",
+    "react-addons-test-utils": "^0.14.7",
     "replace": "^0.3.0",
     "style-loader": "^0.13.0",
     "webpack-merge": "^0.7.3"
@@ -38,14 +41,9 @@
     "build": "node config && webpack && cordova build",
     "prod": "NODE_ENV=production node config && webpack -p && cordova build",
     "start": "node config && HOST=0.0.0.0 webpack-dev-server",
-    "test": "echo \"No tests (yet!) -- submit a PR?\" && exit 0"
+    "test": "NODE_ENV=production NODE_PATH=$NODE_PATH:$PWD/src mocha \"./src/**/*_test.js\" --compilers js:babel-core/register,css:css-null-compiler.js --recursive --require ./test/setup.js",
+    "test:watch": "npm test -- --watch"
   },
-  "author": "Jed Watson",
-  "contributors": [
-    {
-      "name": "Tommy-Carlos Williams",
-      "email": "tommy@devgeeks.org"
-    }
-  ],
+  "author": "Tommy-Carlos Williams <tommy@devgeeks.org>",
   "license": "MIT"
 }

@@ -4,7 +4,7 @@ import { Redirect, Router, Route } from 'react-router';
 import { hashHistory } from 'react-router';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 
-import PlayView from './containers/PlayView';
+import PlayView from 'containers/PlayView';
 
 import './index.css';
 

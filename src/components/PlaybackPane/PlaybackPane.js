@@ -1,11 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import './playbackpanel.css';
+import './playbackpane.css';
 
 export default React.createClass({
 
-  displayName: 'PlaybackPanel',
+  displayName: 'PlaybackPane',
 
   propTypes: {
     children: React.PropTypes.array,
@@ -13,11 +13,12 @@ export default React.createClass({
 
   render() {
     const cx = classNames({
-      'playback-panel': true,
+      'playback-pane': true,
     });
 
     return (
       <div className={ cx }>
+        <div className="bg" />
         { this.props.children }
       </div>
     );

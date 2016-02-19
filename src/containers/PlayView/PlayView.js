@@ -1,11 +1,11 @@
 import React from 'react';
 
-import PlaybackPanel from '../../components/PlaybackPanel';
-import PlaybackControls from '../../components/PlaybackControls';
-import NowPlaying from '../../components/NowPlaying';
-import PlayButton from '../../components/PlayButton';
-import StopButton from '../../components/StopButton';
-import PendingButton from '../../components/PendingButton';
+import PlaybackPane from 'components/PlaybackPane';
+import PlaybackControls from 'components/PlaybackControls';
+import NowPlaying from 'components/NowPlaying';
+import PlayButton from 'components/PlayButton';
+import StopButton from 'components/StopButton';
+import PendingButton from 'components/PendingButton';
 
 export default React.createClass({
 
@@ -23,6 +23,8 @@ export default React.createClass({
     };
   },
 
+  // At the moment this just simulates for showing the UI/UX
+  //  of the controls
   handlePlaybackControlAction(type) {
     switch (type) {
       case 'play':
@@ -75,12 +77,12 @@ export default React.createClass({
     }
 
     return (
-      <PlaybackPanel>
+      <PlaybackPane>
         <NowPlaying nowPlaying={ nowPlaying } />
         <PlaybackControls isPlaying={ isPlaying }>
           { controls }
         </PlaybackControls>
-      </PlaybackPanel>
+      </PlaybackPane>
     );
   },
 });

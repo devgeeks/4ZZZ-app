@@ -13,7 +13,11 @@ export default React.createClass({
     });
 
     return (
-      <div className={ cx } />
+      <div className={ cx }>
+        <div>This will display</div>
+        <div>the currently playing</div>
+        <div>show</div>
+      </div>
     );
   },
 });
