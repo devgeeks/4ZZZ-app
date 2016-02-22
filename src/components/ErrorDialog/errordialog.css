@@ -1,0 +1,8 @@
+.error-dialog {
+  position: absolute;
+  top: 66px;
+  width: 280px;
+  margin-left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}

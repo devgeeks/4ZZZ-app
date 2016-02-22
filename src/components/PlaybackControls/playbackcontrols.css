@@ -6,7 +6,6 @@
   box-sizing: border-box;
   width: 64px;
   height: 64px;
-  padding: 12px;
   border-radius: 50%;
   background: #efefef;
   transform: translate3d(0,0,0);
@@ -51,10 +50,6 @@
   opacity: 0.01;
 }
 
-.playback-controls span {
-  margin-left: 16px;
-}
-
 .playback-controls .loading-message {
-  margin-left: 8px;
+  margin-left: -8px;
 }

@@ -20,6 +20,7 @@ const common = {
     alias: {
       components: `${__dirname}/src/components/`,
       containers: `${__dirname}/src/containers/`,
+      stores: `${__dirname}/src/stores/`,
     },
   },
   module: {
@@ -33,6 +34,10 @@ const common = {
         test: /\.jsx?$/,
         loader: 'babel?cacheDirectory',
         include: PATHS.src,
+      },
+      {
+        include: /\.json$/,
+        loaders: ['json-loader'],
       },
     ],
   },

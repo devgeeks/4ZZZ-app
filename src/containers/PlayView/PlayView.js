@@ -7,6 +7,8 @@ import PlayButton from 'components/PlayButton';
 import StopButton from 'components/StopButton';
 import PendingButton from 'components/PendingButton';
 
+import GuideStore from 'stores/Guide';
+
 export default React.createClass({
 
   displayName: 'PlayView',
@@ -21,6 +23,30 @@ export default React.createClass({
       isPlaying: false,
       nowPlaying: {},
     };
+  },
+
+  componentWillMount() {
+    GuideStore.addChangeListener('nowPlaying', this.updateStateFromGuideStore);
+    GuideStore.addChangeListener('error', this.updateErrorFromGuideStore);
+  },
+
+  componentWillUnmount() {
+    GuideStore.removeChangeListener('nowPlaying', this.updateStateFromGuideStore);
+    GuideStore.removeChangeListener('error', this.updateErrorFromGuideStore);
+  },
+
+  updateStateFromGuideStore() {
+    const guideState = GuideStore.getState();
+    this.setState({
+      nowPlaying: guideState.nowPlaying,
+    });
+    console.log('state updated');
+  },
+
+  updateErrorFromGuideStore() {
+    const { error } = GuideStore.getState();
+    // @TODO Error handling needs UI
+    console.error(error.err);
   },
 
   // At the moment this just simulates for showing the UI/UX
@@ -55,8 +81,7 @@ export default React.createClass({
   },
 
   render() {
-    const { nowPlaying } = this.props;
-    const { isPending, isPlaying } = this.state;
+    const { isPending, isPlaying, nowPlaying } = this.state;
 
     // Default to the play button
     let controls = <PlayButton handleClick={ this.handlePlaybackControlAction } />;

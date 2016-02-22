@@ -2,4 +2,13 @@
   color: #ffffff;
   text-align: center;
   padding: 20px;
+  line-height: 1.5em;
+}
+
+.now-playing .show-name {
+  font-weight: bold;
+}
+
+.now-playing .show-broadcasters {
+  font-style: italic;
 }

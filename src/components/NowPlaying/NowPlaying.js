@@ -7,16 +7,33 @@ export default React.createClass({
 
   displayName: 'NowPlaying',
 
+  propTypes: {
+    nowPlaying: React.PropTypes.object,
+  },
+
   render() {
+    let { nowPlaying } = this.props;
+    if (!nowPlaying.name) {
+      nowPlaying = {
+        name: '',
+        timeslot: '',
+        broadcasters: '',
+      };
+    }
+
     const cx = classNames({
       'now-playing': true,
     });
 
     return (
       <div className={ cx }>
-        <div>This will display</div>
-        <div>the currently playing</div>
-        <div>show</div>
+        <div className="show-name">{ nowPlaying.name }</div>
+        <div className="show-time">
+          { nowPlaying.timeslot }
+        </div>
+        <div className="show-broadcasters">
+          { nowPlaying.broadcasters }
+        </div>
       </div>
     );
   },
