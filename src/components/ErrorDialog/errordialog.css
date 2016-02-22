@@ -1,8 +1,30 @@
 .error-dialog {
+  box-sizing: border-box;
   position: absolute;
   top: 66px;
   width: 280px;
   margin-left: 50%;
-  -webkit-transform: translate(-50%, 0);
-          transform: translate(-50%, 0);
+  background: red;
+  color: white;
+  z-index: 100;
+  text-align: center;
+  padding: 8px;
+  border-radius: 2px;
+  opacity: 0.01;
+  visibility: hidden;
+  -webkit-transform: translate3d(-50%, -100%, 0);
+          transform: translate3d(-50%, -100%, 0);
+  -webkit-transition: all .3s ease-in-out;
+          transition: all .3s ease-in-out;
+}
+
+.error-dialog.displayed {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: translate3d(-50%, 0, 0);
+          transform: translate3d(-50%, 0, 0);
+}
+
+.error-dialog .title {
+  font-weight: bold;
 }

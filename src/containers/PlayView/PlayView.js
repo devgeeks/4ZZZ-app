@@ -14,6 +14,7 @@ export default React.createClass({
   displayName: 'PlayView',
 
   propTypes: {
+    errorHandler: React.PropTypes.func,
     nowPlaying: React.PropTypes.bool,
   },
 
@@ -46,7 +47,8 @@ export default React.createClass({
   updateErrorFromGuideStore() {
     const { error } = GuideStore.getState();
     // @TODO Error handling needs UI
-    console.error(error.err);
+    const { errorHandler } = this.props;
+    errorHandler(error);
   },
 
   // At the moment this just simulates for showing the UI/UX

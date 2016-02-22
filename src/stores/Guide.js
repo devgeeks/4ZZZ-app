@@ -39,7 +39,6 @@ function fetchGuideData(callback) {
         msg: 'Error: unable to load guide data from the API',
         err,
       };
-      _error = err;
       callback(err);
     }
   });
@@ -62,6 +61,7 @@ function parseGuideData() {
 }
 
 function determineNowPlaying(callback) {
+  // @TODO Refactor for clarity
   let guideMoment;
   let tmpH;
   let nowH;
@@ -75,11 +75,14 @@ function determineNowPlaying(callback) {
       if (nowH >= tmpH && nowH < (tmpH + _guide[today][slot].duration)) {
         const tmpEndTime =
           guideMoment.clone().add(_guide[today][slot].duration, 'hours');
+        const broadcasters = _guide[today][slot].broadcasters
+          ? `with ${_guide[today][slot].broadcasters}`
+          : '';
         _nowPlaying = {
           name: _guide[today][slot].name,
           timeslot: `${guideMoment.format('dddd')}s,
             ${guideMoment.format('h:mma')} - ${tmpEndTime.format('h:mma')}`,
-          broadcasters: `with ${_guide[today][slot].broadcasters}`,
+          broadcasters,
         };
         callback(null, _nowPlaying);
         return;
