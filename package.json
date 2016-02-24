@@ -34,6 +34,7 @@
     "expect": "^1.14.0",
     "jsdom": "^8.0.4",
     "json-loader": "^0.5.4",
+    "mockdate": "^1.0.4",
     "react-addons-test-utils": "^0.14.7",
     "replace": "^0.3.0",
     "style-loader": "^0.13.0",
