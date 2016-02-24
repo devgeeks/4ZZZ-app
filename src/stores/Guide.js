@@ -1,11 +1,12 @@
+/* global __PRODUCTION__ */
 import Store from 'store-prototype';
 import moment, { tz } from 'moment-timezone';
 import xhr from 'xhr';
 
-const GuideStore = new Store();
-
-// let _guideDataUri = 'http://4zzzfm.org.au:41021';
-let _guideDataUri = 'data.json';
+let _guideDataUri = 'http://4zzzfm.org.au:41021';
+if (typeof __PRODUCTION__ !== 'undefined' && !__PRODUCTION__) {
+  _guideDataUri = 'data.json';
+}
 let _guideData;
 let _nowPlaying = {
   name: '',
@@ -23,6 +24,8 @@ const _guide = {
 };
 let _error;
 
+const GuideStore = new Store();
+
 function fetchGuideData(callback) {
   xhr({
     body: '',
@@ -34,7 +37,6 @@ function fetchGuideData(callback) {
     try {
       callback(null, JSON.parse(data));
     } catch (e) {
-      // console.error('Error: unable to load guide data from the API', err, resp);
       _error = {
         msg: 'Error: unable to load guide data from the API',
         err,
@@ -45,14 +47,14 @@ function fetchGuideData(callback) {
 }
 
 function parseGuideData() {
-  let guideMoment;
+  let slotLocalTime;
   for (const day in _guideData) {
     if (_guideData.hasOwnProperty(day)) {
       for (const slot in _guideData[day]) {
         if (_guideData[day].hasOwnProperty(slot)) {
-          guideMoment = tz(_guideData[day][slot].thisweek, 'UTC')
+          slotLocalTime = tz(_guideData[day][slot].thisweek, 'UTC')
             .clone().tz(tz.guess());
-          _guide[guideMoment.format('dddd')][guideMoment.format()]
+          _guide[slotLocalTime.format('dddd')][slotLocalTime.format()]
             = _guideData[day][slot];
         }
       }
@@ -62,26 +64,26 @@ function parseGuideData() {
 
 function determineNowPlaying(callback) {
   // @TODO Refactor for clarity
-  let guideMoment;
+  let slotLocalTime;
   let tmpH;
   let nowH;
   const today = moment().format('dddd');
   for (const slot in _guide[today]) {
     if (_guide[today].hasOwnProperty(slot)) {
-      guideMoment = tz(_guide[today][slot].thisweek, 'UTC')
+      slotLocalTime = tz(_guide[today][slot].thisweek, 'UTC')
         .clone().tz(tz.guess());
-      tmpH = parseInt(guideMoment.format('H'), 10);
+      tmpH = parseInt(slotLocalTime.format('H'), 10);
       nowH = parseInt(moment().format('H'), 10);
       if (nowH >= tmpH && nowH < (tmpH + _guide[today][slot].duration)) {
         const tmpEndTime =
-          guideMoment.clone().add(_guide[today][slot].duration, 'hours');
+          slotLocalTime.clone().add(_guide[today][slot].duration, 'hours');
         const broadcasters = _guide[today][slot].broadcasters
           ? `with ${_guide[today][slot].broadcasters}`
           : '';
         _nowPlaying = {
           name: _guide[today][slot].name,
-          timeslot: `${guideMoment.format('dddd')}s,
-            ${guideMoment.format('h:mma')} - ${tmpEndTime.format('h:mma')}`,
+          timeslot: `${slotLocalTime.format('dddd')}s,
+            ${slotLocalTime.format('h:mma')} - ${tmpEndTime.format('h:mma')}`,
           broadcasters,
         };
         callback(null, _nowPlaying);
@@ -101,6 +103,7 @@ function determineNowPlaying(callback) {
 GuideStore.extend({
   getState() {
     return {
+      uri: _guideDataUri,
       error: _error,
       guide: _guide,
       nowPlaying: _nowPlaying,

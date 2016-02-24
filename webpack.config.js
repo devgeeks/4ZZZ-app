@@ -8,6 +8,10 @@ const PATHS = {
   build: path.join(__dirname, 'www'),
 };
 
+const definePlugin = new webpack.DefinePlugin({
+  __PRODUCTION__: JSON.stringify(JSON.parse(process.env.NODE_ENV || 'false')),
+});
+
 process.env.BABEL_ENV = ENV;
 
 const common = {
@@ -41,6 +45,7 @@ const common = {
       },
     ],
   },
+  plugins: [definePlugin],
 };
 
 if (ENV === 'development') {
