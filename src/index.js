@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Redirect, Router, Route } from 'react-router';
-import { hashHistory } from 'react-router';
+import { Redirect, Router, Route, hashHistory } from 'react-router';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 
 import PlayView from 'containers/PlayView';

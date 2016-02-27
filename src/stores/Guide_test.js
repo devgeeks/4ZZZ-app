@@ -77,9 +77,10 @@ describe('GuideStore', () => {
     };
     const guideChangeHandler = () => {
       const { guide, nowPlaying } = GuideStore.getState();
-      expect(guide.Tuesday[moment('2016-02-22T13:00:00.000Z').format()])
+      expect(guide.Tuesday[moment(guideData.Monday['23:00'].thisweek).format()])
         .toExist();
       expect(nowPlaying.timeslot).toContain('Tuesdays');
+      expect(nowPlaying.name).toContain('Mocked Midnight Show');
       GuideStore.removeChangeListener('guide', guideChangeHandler);
       mockdate.reset();
       done();

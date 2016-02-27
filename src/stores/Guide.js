@@ -54,8 +54,8 @@ function parseGuideData() {
         if (_guideData[day].hasOwnProperty(slot)) {
           slotLocalTime = tz(_guideData[day][slot].thisweek, 'UTC')
             .clone().tz(tz.guess());
-          _guide[slotLocalTime.format('dddd')][slotLocalTime.format()]
-            = _guideData[day][slot];
+          _guide[slotLocalTime.format('dddd')][slotLocalTime.format()] =
+            _guideData[day][slot];
         }
       }
     }
@@ -96,7 +96,6 @@ function determineNowPlaying(callback) {
     msg: 'Failed to find current show',
     err,
   };
-  // console.error(_error);
   callback(_error, null);
 }
 

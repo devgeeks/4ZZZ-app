@@ -22,18 +22,61 @@ export default React.createClass({
     return {
       isPending: false,
       isPlaying: false,
+      mediaStream: null,
       nowPlaying: {},
     };
   },
 
   componentWillMount() {
+    document.addEventListener('deviceready', () => {
+      const mediaStream = this.createMediaStream();
+      this.setState({
+        mediaStream,
+      });
+    }, false);
     GuideStore.addChangeListener('nowPlaying', this.updateStateFromGuideStore);
     GuideStore.addChangeListener('error', this.updateErrorFromGuideStore);
   },
 
   componentWillUnmount() {
+    const { mediaStream } = this.state();
+    if (mediaStream) {
+      mediaStream.stop();
+      mediaStream.release();
+    }
     GuideStore.removeChangeListener('nowPlaying', this.updateStateFromGuideStore);
     GuideStore.removeChangeListener('error', this.updateErrorFromGuideStore);
+  },
+
+  createMediaStream() {
+    return new window.Media(
+      'http://stream.4zzzfm.org.au:789/;',
+      () => { console.log('media stream complete?'); },
+      (error) => {
+        console.log(this);
+        console.error(error);
+      },
+      (status) => {
+        console.log(status);
+        switch (status) {
+          case 2:
+            console.log('playing');
+            this.setState({
+              isPaying: true,
+              isPending: false,
+            });
+            break;
+          case 4:
+            console.log('stopped');
+            this.setState({
+              isPlaying: false,
+              isPending: false,
+            });
+            break;
+          default:
+            // ...
+        }
+      });
   },
 
   updateStateFromGuideStore() {
@@ -41,7 +84,6 @@ export default React.createClass({
     this.setState({
       nowPlaying: guideState.nowPlaying,
     });
-    console.log('state updated');
   },
 
   updateErrorFromGuideStore() {
@@ -54,27 +96,25 @@ export default React.createClass({
   // At the moment this just simulates for showing the UI/UX
   //  of the controls
   handlePlaybackControlAction(type) {
+    const { mediaStream } = this.state;
+    if (!mediaStream) {
+      console.error('No media yet. No deviceready?');
+      return;
+    }
     switch (type) {
       case 'play':
         console.log('pending');
+        mediaStream.play();
         this.setState({
           isPlaying: true,
           isPending: true,
         });
-        setTimeout(() => {
-          if (this.state.isPlaying) {
-            console.log('playing');
-            this.setState({
-              isPlaying: true,
-              isPending: false,
-            });
-          }
-        }, 2000);
         break;
       case 'pending':
       case 'stop':
       default:
         console.log('stopping');
+        mediaStream.stop();
         this.setState({
           isPending: false,
           isPlaying: false,
