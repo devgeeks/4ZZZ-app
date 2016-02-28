@@ -22,15 +22,16 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <platform name="android">
-        <content src="http://10.0.2.2:8080/index.html" />
+        <content src="index.html" />
         <allow-intent href="market:*" />
     </platform>
     <platform name="ios">
-        <content src="http://localhost:8080/index.html" />
+        <content src="index.html" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <allow-navigation href="http://*/*" />
     </platform>
     <plugin name="cordova-plugin-whitelist" version="1" />
     <plugin name="cordova-plugin-statusbar" spec="~2.1.0" />
+    <plugin name="nl.x-services.plugins.backgroundaudio" spec="https://github.com/EddyVerbruggen/cordova-plugin-backgroundaudio" />
 </widget>

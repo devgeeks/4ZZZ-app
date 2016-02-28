@@ -9,7 +9,9 @@ const PATHS = {
 };
 
 const definePlugin = new webpack.DefinePlugin({
-  __PRODUCTION__: JSON.stringify(JSON.parse(process.env.NODE_ENV || 'false')),
+  'process.env': {
+    NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+  },
 });
 
 process.env.BABEL_ENV = ENV;

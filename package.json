@@ -43,9 +43,9 @@
   "scripts": {
     "android": "cordova run android",
     "ios": "cordova run ios",
-    "prepare": "node config && webpack && cordova prepare",
+    "prepare": "node config && NODE_ENV=production webpack && cordova prepare",
     "build": "node config && webpack && cordova build",
-    "prod": "NODE_ENV=production node config && webpack -p && cordova build",
+    "prod": "NODE_ENV=production node config && NODE_ENV=production webpack -p && cordova build",
     "start": "node config && HOST=0.0.0.0 webpack-dev-server",
     "test": "NODE_ENV=production NODE_PATH=$NODE_PATH:$PWD/src mocha \"./src/**/*_test.js\" --compilers js:babel-core/register,css:css-null-compiler.js --recursive --require ./test/setup.js",
     "test:watch": "npm test -- --watch"

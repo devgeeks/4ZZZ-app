@@ -4,7 +4,7 @@ import moment, { tz } from 'moment-timezone';
 import xhr from 'xhr';
 
 let _guideDataUri = 'http://4zzzfm.org.au:41021';
-if (typeof __PRODUCTION__ !== 'undefined' && !__PRODUCTION__) {
+if (process.env.NODE_ENV !== 'production') {
   _guideDataUri = 'data.json';
 }
 let _guideData;
