@@ -26,6 +26,8 @@
   "devDependencies": {
     "babel-eslint": "^4.1.8",
     "babel-preset-react-hmre": "^1.0.1",
+    "cordova-icon": "^0.4.1",
+    "cordova-splash": "^0.4.0",
     "css-loader": "^0.23.1",
     "elementtree": "^0.1.6",
     "eslint": "^1.10.3",
@@ -41,6 +43,7 @@
     "webpack-merge": "^0.7.3"
   },
   "scripts": {
+    "icons": "cordova-icon && cordova-splash",
     "android": "cordova run android",
     "ios": "cordova run ios",
     "prepare": "node config && NODE_ENV=production webpack && cordova prepare",

@@ -34,4 +34,5 @@
     <plugin name="cordova-plugin-whitelist" version="1" />
     <plugin name="cordova-plugin-statusbar" spec="~2.1.0" />
     <plugin name="nl.x-services.plugins.backgroundaudio" spec="https://github.com/EddyVerbruggen/cordova-plugin-backgroundaudio" />
+    <hook src="scripts/icons-hook.sh" type="after_platform_add" />
 </widget>
