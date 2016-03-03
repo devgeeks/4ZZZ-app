@@ -22,6 +22,7 @@ const _guide = {
   Friday: {},
   Saturday: {},
 };
+const _flatGuideArray = [];
 let _error;
 
 const GuideStore = new Store();
@@ -46,12 +47,13 @@ function fetchGuideData(callback) {
   });
 }
 
-function parseGuideData() {
+function parseGuideData(callback) {
   let slotLocalTime;
   for (const day in _guideData) {
     if (_guideData.hasOwnProperty(day)) {
       for (const slot in _guideData[day]) {
         if (_guideData[day].hasOwnProperty(slot)) {
+          _flatGuideArray.push(_guideData[day][slot]);
           slotLocalTime = tz(_guideData[day][slot].thisweek, 'UTC')
             .clone().tz(tz.guess());
           _guide[slotLocalTime.format('dddd')][slotLocalTime.format()]
@@ -60,44 +62,45 @@ function parseGuideData() {
       }
     }
   }
+  if (callback) callback(null, _guide, _flatGuideArray);
 }
 
 function determineNowPlaying(callback) {
-  // @TODO Refactor for clarity
-  let slotLocalTime;
-  let tmpH;
-  let nowH;
-  const today = moment().format('dddd');
-  for (const slot in _guide[today]) {
-    if (_guide[today].hasOwnProperty(slot)) {
-      slotLocalTime = tz(_guide[today][slot].thisweek, 'UTC')
-        .clone().tz(tz.guess());
-      tmpH = parseInt(slotLocalTime.format('H'), 10);
-      nowH = parseInt(moment().format('H'), 10);
-      if (nowH >= tmpH && nowH < (tmpH + _guide[today][slot].duration)) {
-        const tmpEndTime =
-          slotLocalTime.clone().add(_guide[today][slot].duration, 'hours');
-        const broadcasters = _guide[today][slot].broadcasters
-          ? `with ${_guide[today][slot].broadcasters}`
-          : '';
-        _nowPlaying = {
-          name: _guide[today][slot].name,
-          timeslot: `${slotLocalTime.format('dddd')}s,
-            ${slotLocalTime.format('h:mma')} - ${tmpEndTime.format('h:mma')}`,
-          broadcasters,
-        };
-        callback(null, _nowPlaying);
-        return;
+  if (_flatGuideArray.length) {
+    const now = moment();
+    let slotThisWeek;
+    const nowPlayingSlotArr = _flatGuideArray.filter((slot) => {
+      slotThisWeek = moment(slot.thisweek);
+      if (now > slotThisWeek && now < slotThisWeek.add(slot.duration, 'hours')) {
+        return true;
       }
+    });
+    if (nowPlayingSlotArr.length === 1) {
+      const nowPlayingSlot = nowPlayingSlotArr[0];
+      const slotLocalTime = moment(nowPlayingSlot.thisweek);
+      const slotEndTime = slotLocalTime.clone().add(nowPlayingSlot.duration, 'hours');
+      const broadcasters = nowPlayingSlot.broadcasters
+        ? `with ${nowPlayingSlot.broadcasters}`
+        : '';
+      _nowPlaying = {
+        name: nowPlayingSlot.name,
+        timeslot: `${slotLocalTime.format('dddd')}s,
+            ${slotLocalTime.format('h:mma')} - ${slotEndTime.format('h:mma')}`,
+        broadcasters,
+      };
+      callback(null);
+    } else {
+      const err = new Error('Failed to find current show');
+      _error = {
+        msg: 'Failed to find current show',
+        err,
+      };
+      console.error(_error);
+      callback(_error);
     }
+  } else {
+    callback({ msg: 'No valid guide', err: new Error('No valid guide') });
   }
-  const err = new Error('Failed to find current show');
-  _error = {
-    msg: 'Failed to find current show',
-    err,
-  };
-  // console.error(_error);
-  callback(_error, null);
 }
 
 GuideStore.extend({
@@ -105,6 +108,7 @@ GuideStore.extend({
     return {
       uri: _guideDataUri,
       error: _error,
+      flatGuide: _flatGuideArray,
       guide: _guide,
       nowPlaying: _nowPlaying,
     };
@@ -129,21 +133,23 @@ GuideStore.extend({
         setTimeout(() => GuideStore.updateNowPlaying(), 30000); // 30 seconds
     });
   },
-  update() {
+  update(callback) {
     // @TODO immutable?
     parseGuideData();
     // Next, kick off the now playing update loop
-    this.updateNowPlaying();
+    this.updateNowPlaying(callback);
     this.notifyChange('guide');
   },
-  setGuideDataUri(uri) {
+  setGuideDataUri(uri, callback) {
     _guideDataUri = uri;
+    if (callback) callback(null, _guideDataUri);
   },
-  setGuideData(data) {
+  setGuideData(data, callback) {
     // @TODO immutable?
     _guideData = data;
     this.update();
     this.notifyChange('data');
+    if (callback) callback(null, _guideData);
   },
 });
 

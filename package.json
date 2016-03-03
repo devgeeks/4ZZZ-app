@@ -10,6 +10,7 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "classnames": "^2.2.3",
+    "flux": "^2.1.1",
     "moment": "^2.11.2",
     "moment-timezone": "^0.5.0",
     "react": "^0.14.6",
@@ -19,6 +20,7 @@
     "react-router": "^2.0.0",
     "react-tappable": "^0.8.0",
     "store-prototype": "^1.1.1",
+    "tinyvents": "^0.3.0",
     "webpack": "^1.12.12",
     "webpack-dev-server": "^1.14.1",
     "xhr": "^2.2.0"

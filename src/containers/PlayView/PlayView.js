@@ -66,9 +66,9 @@ export default React.createClass({
   },
 
   updateStateFromGuideStore() {
-    const guideState = GuideStore.getState();
+    const { nowPlaying } = GuideStore.getState();
     this.setState({
-      nowPlaying: guideState.nowPlaying,
+      nowPlaying,
     });
     console.log('state updated');
   },
