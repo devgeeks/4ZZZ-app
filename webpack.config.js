@@ -24,8 +24,10 @@ const common = {
   },
   resolve: {
     alias: {
+      actions: `${__dirname}/src/actions/`,
       components: `${__dirname}/src/components/`,
       containers: `${__dirname}/src/containers/`,
+      reducers: `${__dirname}/src/reducers/`,
       stores: `${__dirname}/src/stores/`,
     },
   },

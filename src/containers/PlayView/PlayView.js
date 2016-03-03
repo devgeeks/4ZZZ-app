@@ -7,8 +7,6 @@ import PlayButton from 'components/PlayButton';
 import StopButton from 'components/StopButton';
 import PendingButton from 'components/PendingButton';
 
-import GuideStore from 'stores/Guide';
-
 const audioURL = 'http://stream.4zzzfm.org.au:789/;';
 let audio;
 
@@ -56,32 +54,13 @@ export default React.createClass({
   },
 
   componentWillMount() {
-    GuideStore.addChangeListener('nowPlaying', this.updateStateFromGuideStore);
-    GuideStore.addChangeListener('error', this.updateErrorFromGuideStore);
+    // ...
   },
 
   componentWillUnmount() {
-    GuideStore.removeChangeListener('nowPlaying', this.updateStateFromGuideStore);
-    GuideStore.removeChangeListener('error', this.updateErrorFromGuideStore);
+    // ...
   },
 
-  updateStateFromGuideStore() {
-    const { nowPlaying } = GuideStore.getState();
-    this.setState({
-      nowPlaying,
-    });
-    console.log('state updated');
-  },
-
-  updateErrorFromGuideStore() {
-    const { error } = GuideStore.getState();
-    // @TODO Error handling needs UI
-    const { errorHandler } = this.props;
-    errorHandler(error);
-  },
-
-  // At the moment this just simulates for showing the UI/UX
-  //  of the controls
   handlePlaybackControlAction(type) {
     switch (type) {
       case 'play':

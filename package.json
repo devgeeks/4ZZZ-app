@@ -20,13 +20,16 @@
     "react-router": "^2.0.0",
     "react-tappable": "^0.8.0",
     "redux": "^3.3.1",
+    "redux-logger": "^2.6.1",
+    "redux-thunk": "^1.0.3",
     "webpack": "^1.12.12",
     "webpack-dev-server": "^1.14.1",
-    "xhr": "^2.2.0"
+    "whatwg-fetch": "^0.11.0"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.8",
     "babel-preset-react-hmre": "^1.0.1",
+    "babel-preset-stage-2": "^6.5.0",
     "cordova-icon": "^0.4.1",
     "cordova-splash": "^0.4.0",
     "css-loader": "^0.23.1",
