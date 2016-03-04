@@ -16,6 +16,10 @@
     bottom .1s ease-out .2s, border-radius .1s ease-out .05s;
 }
 
+.playback-controls.offline {
+  bottom: 62px;
+}
+
 .playback-controls.is-playing {
   border-radius: 0;
   width: 100%;
@@ -29,6 +33,10 @@
     bottom .1s ease-out, border-radius .1s ease-out .2s;
           transition: width .2s ease-in-out .1s, right .3s ease-out,
             bottom .1s ease-out, border-radius .1s ease-out .2s;
+}
+
+.playback-controls.offline.is-playing {
+  bottom: 30px;
 }
 
 .playback-controls:before {

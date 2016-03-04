@@ -22,11 +22,15 @@ const common = {
     path: PATHS.build,
     filename: 'bundle.js',
   },
+  devtool: 'source-map',
   resolve: {
     alias: {
+      actions: `${__dirname}/src/actions/`,
       components: `${__dirname}/src/components/`,
       containers: `${__dirname}/src/containers/`,
+      reducers: `${__dirname}/src/reducers/`,
       stores: `${__dirname}/src/stores/`,
+      utils: `${__dirname}/src/utils/`,
     },
   },
   module: {
@@ -34,7 +38,7 @@ const common = {
       {
         test: /\.css$/,
         loaders: ['style', 'css?url=false'],
-        include: PATHS.src,
+        includes: [PATHS.src, PATHS.node_modules],
       },
       {
         test: /\.jsx?$/,

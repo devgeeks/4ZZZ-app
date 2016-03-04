@@ -5,6 +5,7 @@
     "experimentalObjectRestSpread": true,
   },
   "rules": {
+    "spaced-comment": 0,
     "no-console": 0,
     "react/prefer-es6-class": 0,
   },

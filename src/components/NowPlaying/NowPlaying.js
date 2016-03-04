@@ -12,9 +12,10 @@ export default React.createClass({
   },
 
   render() {
-    let { nowPlaying } = this.props;
-    if (!nowPlaying.name) {
-      nowPlaying = {
+    const { nowPlaying } = this.props;
+    let { show } = nowPlaying;
+    if (!show.name) {
+      show = {
         name: '',
         timeslot: '',
         broadcasters: '',
@@ -27,12 +28,12 @@ export default React.createClass({
 
     return (
       <div className={ cx }>
-        <div className="show-name">{ nowPlaying.name }</div>
+        <div className="show-name">{ show.name }</div>
         <div className="show-time">
-          { nowPlaying.timeslot }
+          { show.timeslot }
         </div>
         <div className="show-broadcasters">
-          { nowPlaying.broadcasters }
+          { show.broadcasters }
         </div>
       </div>
     );
