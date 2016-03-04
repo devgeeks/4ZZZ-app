@@ -83,7 +83,7 @@ function shouldFetchGuideData(state) {
   const { guide } = state;
   const now = moment();
   const fetched = moment(guide.fetched || '');
-  const expires = fetched.isValid() ? fetched.clone().add(1, 'day') : now;
+  const expires = fetched.isValid() ? fetched.clone().add(1, 'minute') : now;
   // Don't fetch if we are already, and don't fetch if we have fetched in the
   //  last 24 hours
   if (now < expires || guide.isFetching) {

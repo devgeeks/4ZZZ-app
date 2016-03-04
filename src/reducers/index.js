@@ -1,3 +1,4 @@
+import moment from 'moment-timezone';
 import { combineReducers } from 'redux';
 import {
   SET_GUIDE_DATA_URL, GUIDE_DATA_REQUESTED, GUIDE_DATA_ERROR,
@@ -43,6 +44,7 @@ function guide(state = {
         ...state,
         programme: action.guide.programme,
         shows: action.guide.shows,
+        fetched: moment().format(),
         isFetching: false,
         isParsing: false,
         error: null,

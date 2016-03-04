@@ -23,7 +23,8 @@ export default {
         }
       }
     }
-
+    // Cache locally?
+    // Only if using something async like localForage...
     return Promise.resolve(guide);
   },
   determineNowPlaying(shows) {

@@ -38,7 +38,7 @@ const common = {
       {
         test: /\.css$/,
         loaders: ['style', 'css?url=false'],
-        include: PATHS.src,
+        includes: [PATHS.src, PATHS.node_modules],
       },
       {
         test: /\.jsx?$/,

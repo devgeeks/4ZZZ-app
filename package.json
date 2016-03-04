@@ -12,6 +12,7 @@
     "classnames": "^2.2.3",
     "moment": "^2.11.2",
     "moment-timezone": "^0.5.0",
+    "offline-js": "^0.7.15",
     "react": "^0.14.6",
     "react-addons-css-transition-group": "^0.14.7",
     "react-dom": "^0.14.7",

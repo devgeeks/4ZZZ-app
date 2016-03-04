@@ -27,7 +27,10 @@ const App = React.createClass({
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchGuideDataIfNeeded());
+    (function updateGuide() {
+      dispatch(fetchGuideDataIfNeeded());
+      setTimeout(updateGuide, 3600000); // Immediately, and every hour after
+    }());
   },
 
   // Global error handler passed to all routes

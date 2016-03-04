@@ -9,5 +9,5 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('nowPlaying actions', () => {
-  // @TODO
+  // @TODO these are really important
 });

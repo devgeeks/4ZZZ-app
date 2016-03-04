@@ -12,12 +12,33 @@ export default React.createClass({
     isPlaying: React.PropTypes.bool,
   },
 
+  getInitialState() {
+    return {
+      offline: false,
+    };
+  },
+
+  componentDidMount() {
+    //window.Offline.on('down', () => {
+      //this.setState({
+        //offline: true,
+      //});
+    //});
+    //window.Offline.on('confirmed-up', () => {
+      //this.setState({
+        //offline: false,
+      //});
+    //});
+  },
+
   render() {
     const { isPlaying } = this.props;
+    const { offline } = this.state;
 
     const cx = classNames({
       'playback-controls': true,
       'is-playing': isPlaying,
+      offline: !!offline,
     });
     return (
       <div className={ cx }>
