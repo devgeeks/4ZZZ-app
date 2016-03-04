@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { determineNowPlayingIfNeeded } from 'actions/nowPlayingActions';
 
 import PlaybackPane from 'components/PlaybackPane';
+import Navbar from 'components/Navbar';
 import PlaybackControls from 'components/PlaybackControls';
 import NowPlaying from 'components/NowPlaying';
 import PlayButton from 'components/PlayButton';
@@ -170,6 +171,7 @@ const PlayView = React.createClass({
 
     return (
       <PlaybackPane>
+        <Navbar />
         <NowPlaying nowPlaying={ nowPlaying } />
         <PlaybackControls currentPosition={ currentPosition }
           isPlaying={ isPlaying }

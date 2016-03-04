@@ -1,0 +1,57 @@
+.navbar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 56px;
+  overflow: hidden;
+  background: #efefef;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.navbar .title {
+  position: absolute;
+  top: 0;
+  right: 56px;
+  left: 56px;
+  height: 56px;
+  line-height: 56px;
+  overflow: hidden;
+  text-align: center;
+  font-size: 120%;
+  font-weight: bold;
+  color: #13567b;
+}
+
+.navbar .button.left,
+.navbar .button.right {
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 56px;
+  height: 56px;
+  line-height: 56px;
+  text-align: center;
+  color: inherit;
+  text-decoration: none;
+}
+
+.navbar .button.right {
+  right: 0;
+  left: auto;
+}
+
+.navbar .button.left {
+  right: auto;
+  left: 0;
+}
+
+.navbar .button svg {
+  fill: #13567b;
+}
+
+.navbar .button.tappable-active svg {
+  fill: #1d84bd;
+  -webkit-transform: scale(1.2, 1.2);
+          transform: scale(1.2, 1.2);
+}

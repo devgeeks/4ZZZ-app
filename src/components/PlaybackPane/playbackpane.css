@@ -9,11 +9,11 @@
 
 .playback-pane .bg {
   background: url('images/4ZZZ_C_Blue.png') top no-repeat;
-  background-position: 0 -80px;
+  background-position: 0 -24px;
   background-size: 100%;
   max-width: 320px;
   width: 100%;
-  height: 240px;
+  height: 296px;
   margin-left: 50%;
   -webkit-transform: translate(-50%, 0);
           transform: translate(-50%, 0);
