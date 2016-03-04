@@ -1,6 +1,8 @@
 import fetch from 'isomorphic-fetch';
 import moment from 'moment-timezone';
 
+import utils from 'utils/4ZZZGuideUtils';
+
 // Export the constants for these actions
 export const SET_GUIDE_DATA_URL = 'SET_GUIDE_DATA_URL';
 export const SET_GUIDE_DATA = 'SET_GUIDE_DATA';
@@ -30,10 +32,9 @@ export function requestGuideData() {
   };
 }
 
-function receiveGuideData(data) {
+function guideDataReceived() {
   return {
     type: GUIDE_DATA_RECEIVED,
-    data,
   };
 }
 
@@ -44,23 +45,48 @@ function guideDataError(error) {
   };
 }
 
+function guideParseError(error) {
+  return {
+    type: GUIDE_PARSING_ERROR,
+    error,
+  };
+}
+
+function receiveGuide(guide) {
+  return {
+    type: GUIDE_DATA_PARSED,
+    guide,
+  };
+}
+
+function parseGuideData(data) {
+  return (dispatch) => {
+    dispatch(guideDataReceived);
+    utils.parseGuideData(data)
+      .then(guide => dispatch(receiveGuide(guide)))
+      .catch(err => dispatch(guideParseError(err)));
+  };
+}
+
 function fetchGuideData() {
   return (dispatch, getState) => {
     const { guideDataUrl } = getState();
     dispatch(requestGuideData());
     return fetch(guideDataUrl)
       .then(response => response.json())
-      .then(json => dispatch(receiveGuideData(json)))
+      .then((json) => dispatch(parseGuideData(json)))
       .catch(error => dispatch(guideDataError(error)));
   };
 }
 
 function shouldFetchGuideData(state) {
-  const { guideData } = state;
+  const { guide } = state;
   const now = moment();
-  const fetched = moment(guideData.fetched || '');
+  const fetched = moment(guide.fetched || '');
   const expires = fetched.isValid() ? fetched.clone().add(1, 'day') : now;
-  if (now < expires || guideData.isFetching) {
+  // Don't fetch if we are already, and don't fetch if we have fetched in the
+  //  last 24 hours
+  if (now < expires || guide.isFetching) {
     return false;
   }
   return true;

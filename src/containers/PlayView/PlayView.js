@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { determineNowPlayingIfNeeded } from 'actions/nowPlayingActions';
 
 import PlaybackPane from 'components/PlaybackPane';
 import PlaybackControls from 'components/PlaybackControls';
@@ -23,25 +26,28 @@ function hhmmss(secs) {
 }
 
 function throttle(callback, limit) {
-  let wait = false;                 // Initially, we're not waiting
-  return () => {              // We return a throttled function
-    if (!wait) {                  // If we're not waiting
-      callback.call();          // Execute users function
-      wait = true;              // Prevent future invocations
-      setTimeout(() => {  // After a period of time
-        wait = false;         // And allow future invocations
+  let wait = false;
+  return () => {
+    if (!wait) {
+      callback.call();
+      wait = true;
+      setTimeout(() => {
+        wait = false;
       }, limit);
     }
   };
 }
 
-export default React.createClass({
+const PlayView = React.createClass({
 
   displayName: 'PlayView',
 
   propTypes: {
+    dispatch: React.PropTypes.func.isRequired,
     errorHandler: React.PropTypes.func,
-    nowPlaying: React.PropTypes.bool,
+    nowPlaying: React.PropTypes.object,
+    store: React.PropTypes.object,
+    guide: React.PropTypes.object,
   },
 
   getInitialState() {
@@ -49,18 +55,17 @@ export default React.createClass({
       currentPosition: '0:00',
       isPending: false,
       isPlaying: false,
-      nowPlaying: {},
     };
   },
 
-  componentWillMount() {
-    // ...
+  componentWillReceiveProps(nextProps) {
+    const { dispatch } = this.props;
+    if (nextProps.guide.shows !== this.props.guide.shows) {
+      dispatch(determineNowPlayingIfNeeded());
+    }
   },
 
-  componentWillUnmount() {
-    // ...
-  },
-
+  // @TODO consider if all of this should be a store with actions, etc
   handlePlaybackControlAction(type) {
     switch (type) {
       case 'play':
@@ -68,7 +73,6 @@ export default React.createClass({
         audio = new Audio(audioURL);
         audio.addEventListener('timeupdate', throttle(() => {
           if (!audio) return;
-          console.log(hhmmss(audio.currentTime));
           this.setState({ currentPosition: hhmmss(audio.currentTime) });
         }, 1000), false);
         audio.addEventListener('error', (error) => {
@@ -113,7 +117,8 @@ export default React.createClass({
   },
 
   render() {
-    const { currentPosition, isPending, isPlaying, nowPlaying } = this.state;
+    const { currentPosition, isPending, isPlaying } = this.state;
+    const { nowPlaying } = this.props;
 
     // Default to the play button
     let controls = <PlayButton handleClick={ this.handlePlaybackControlAction } />;
@@ -145,3 +150,13 @@ export default React.createClass({
     );
   },
 });
+
+function mapStateToProps(state) {
+  const { guide, nowPlaying } = state;
+  return {
+    guide,
+    nowPlaying,
+  };
+}
+
+export default connect(mapStateToProps)(PlayView);

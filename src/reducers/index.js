@@ -1,10 +1,7 @@
-import moment from 'moment-timezone';
-
 import { combineReducers } from 'redux';
 import {
-  SET_GUIDE_DATA_URL, SET_GUIDE_DATA, GUIDE_DATA_REQUESTED,
-  GUIDE_DATA_RECEIVED, GUIDE_DATA_ERROR, GUIDE_DATA_PARSED,
-  GUIDE_PARSING_ERROR,
+  SET_GUIDE_DATA_URL, GUIDE_DATA_REQUESTED, GUIDE_DATA_ERROR,
+  GUIDE_DATA_PARSED, GUIDE_PARSING_ERROR,
 } from 'actions/guideActions';
 import {
   NOW_PLAYING_REQUESTED, NOW_PLAYING_RECEIVED,
@@ -24,89 +21,33 @@ function guideDataUrl(state = url, action) {
   }
 }
 
-function guideData(state = {
-  data: {},
+function guide(state = {
+  programme: {},
+  shows: [],
   isFetching: false,
+  isParsing: false,
   fetched: null,
   error: null,
 }, action) {
   switch (action.type) {
-    case SET_GUIDE_DATA:
-      return action.data;
     case GUIDE_DATA_REQUESTED:
       return {
         ...state,
         isFetching: true,
+        isParsing: false,
         error: null,
       };
-    case GUIDE_DATA_RECEIVED:
+    case GUIDE_DATA_PARSED:
+      console.log(action.guide);
       return {
         ...state,
-        data: action.data,
+        programme: action.guide.programme,
+        shows: action.guide.shows,
         isFetching: false,
-        fetched: moment().format(),
+        isParsing: false,
         error: null,
       };
     case GUIDE_DATA_ERROR:
-      return {
-        ...state,
-        isFetching: false,
-        error: action.error,
-      };
-    default:
-      return state;
-  }
-}
-
-function guide(state = {
-  programme: {
-    Sunday: {},
-    Monday: {},
-    Tuesday: {},
-    Wednesday: {},
-    Thursday: {},
-    Friday: {},
-    Saturday: {},
-  },
-  isParsing: false,
-  error: null,
-}, action) {
-  switch (action.type) {
-    case GUIDE_DATA_RECEIVED:
-      // @TODO how do we kick off parsing here?
-      //  or are we just noting that we are at this stage?
-      return state;
-    case GUIDE_DATA_PARSED:
-      return {
-        ...state,
-        guide: action.guide,
-        isParsing: false,
-        error: null,
-      };
-    case GUIDE_PARSING_ERROR:
-      return {
-        ...state,
-        isParsing: false,
-        error: action.error,
-      };
-    default:
-      return state;
-  }
-}
-
-function slots(state = {
-  shows: [],
-  isParsing: false,
-  error: null,
-}, action) {
-  switch (action.type) {
-    case GUIDE_DATA_PARSED:
-      return {
-        ...state,
-        isParsing: false,
-        error: null,
-        shows: action.shows,
-      };
     case GUIDE_PARSING_ERROR:
       return {
         ...state,
@@ -133,7 +74,7 @@ function nowPlaying(state = {
     case NOW_PLAYING_RECEIVED:
       return {
         ...state,
-        show: action.show,
+        show: action.nowPlaying,
         searchPending: false,
         error: null,
       };
@@ -143,11 +84,9 @@ function nowPlaying(state = {
 }
 
 const rootReducer = combineReducers({
-  guide,
-  guideData,
   guideDataUrl,
+  guide,
   nowPlaying,
-  slots,
 });
 
 export default rootReducer;

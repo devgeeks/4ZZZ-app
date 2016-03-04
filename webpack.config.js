@@ -30,6 +30,7 @@ const common = {
       containers: `${__dirname}/src/containers/`,
       reducers: `${__dirname}/src/reducers/`,
       stores: `${__dirname}/src/stores/`,
+      utils: `${__dirname}/src/utils/`,
     },
   },
   module: {

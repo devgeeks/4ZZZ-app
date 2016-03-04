@@ -73,12 +73,10 @@ const App = React.createClass({
   },
 });
 
-// @TODO this is NOT right, it's just a stub...
 function mapStateToProps(state) {
-  const { guide, guideData } = state;
+  const { guide } = state;
   return {
     guide,
-    guideData,
   };
 }
 
