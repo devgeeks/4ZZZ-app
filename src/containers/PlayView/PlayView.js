@@ -58,6 +58,14 @@ const PlayView = React.createClass({
     };
   },
 
+  componentWillMount() {
+    const { dispatch } = this.props;
+    window.nowPlayingTimer = setInterval(() => {
+      console.log('checking now playing');
+      dispatch(determineNowPlayingIfNeeded());
+    }, 30000);
+  },
+
   componentWillReceiveProps(nextProps) {
     const { dispatch } = this.props;
     if (nextProps.guide.shows !== this.props.guide.shows) {
