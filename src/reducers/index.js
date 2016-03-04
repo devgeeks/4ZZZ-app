@@ -4,10 +4,16 @@ import { combineReducers } from 'redux';
 import {
   SET_GUIDE_DATA_URL, SET_GUIDE_DATA, GUIDE_DATA_REQUESTED,
   GUIDE_DATA_RECEIVED, GUIDE_DATA_ERROR, GUIDE_DATA_PARSED,
-  GUIDE_PARSING_ERROR, NOW_PLAYING_REQUESTED, NOW_PLAYING_RECEIVED,
-} from 'actions';
+  GUIDE_PARSING_ERROR,
+} from 'actions/guideActions';
+import {
+  NOW_PLAYING_REQUESTED, NOW_PLAYING_RECEIVED,
+} from 'actions/nowPlayingActions';
 
-const url = 'http://4zzzfm.org.au:41021';
+let url = 'http://4zzzfm.org.au:41021';
+if (process.env.NODE_ENV !== 'production') {
+  url = 'data.json';
+}
 
 function guideDataUrl(state = url, action) {
   switch (action.type) {

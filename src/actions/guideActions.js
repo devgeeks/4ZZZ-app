@@ -1,4 +1,4 @@
-import fetch from 'whatwg-fetch';
+import fetch from 'isomorphic-fetch';
 import moment from 'moment-timezone';
 
 // Export the constants for these actions
@@ -9,8 +9,6 @@ export const GUIDE_DATA_RECEIVED = 'GUIDE_DATA_RECEIVED';
 export const GUIDE_DATA_ERROR = 'GUIDE_DATA_ERROR';
 export const GUIDE_DATA_PARSED = 'GUIDE_DATA_PARSED';
 export const GUIDE_PARSING_ERROR = 'GUIDE_PARSING_ERROR';
-export const NOW_PLAYING_REQUESTED = 'NOW_PLAYING_REQUESTED';
-export const NOW_PLAYING_RECEIVED = 'NOW_PLAYING_RECEIVED';
 
 export function setGuideDataUrl(url) {
   return {
@@ -60,8 +58,8 @@ function fetchGuideData() {
 function shouldFetchGuideData(state) {
   const { guideData } = state;
   const now = moment();
-  const fetched = moment(guideData.fetched);
-  const expires = fetched.isValid() ? fetched.clone().add(1, 'day') : moment();
+  const fetched = moment(guideData.fetched || '');
+  const expires = fetched.isValid() ? fetched.clone().add(1, 'day') : now;
   if (now < expires || guideData.isFetching) {
     return false;
   }

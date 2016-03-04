@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 
 import ErrorDialog from 'components/ErrorDialog';
+
+import { fetchGuideDataIfNeeded } from 'actions/guideActions';
 
 const App = React.createClass({
 
   displayName: 'App',
 
   propTypes: {
-    children: React.PropTypes.object,
-    location: React.PropTypes.object,
+    children: PropTypes.object,
+    dispatch: PropTypes.func.isRequired,
+    location: PropTypes.object.isRequired,
   },
 
   getInitialState() {
@@ -20,6 +23,11 @@ const App = React.createClass({
         message: '',
       },
     };
+  },
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchGuideDataIfNeeded());
   },
 
   // Global error handler passed to all routes
@@ -67,11 +75,10 @@ const App = React.createClass({
 
 // @TODO this is NOT right, it's just a stub...
 function mapStateToProps(state) {
-  const { guide, guideData, nowPlaying } = state;
+  const { guide, guideData } = state;
   return {
     guide,
     guideData,
-    nowPlaying,
   };
 }
 
