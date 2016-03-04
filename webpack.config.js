@@ -22,6 +22,7 @@ const common = {
     path: PATHS.build,
     filename: 'bundle.js',
   },
+  devtool: 'source-map',
   resolve: {
     alias: {
       actions: `${__dirname}/src/actions/`,
