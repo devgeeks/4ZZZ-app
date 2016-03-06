@@ -13,6 +13,7 @@ export default React.createClass({
   render() {
     const cx = classNames({
       navbar: true,
+      'very-dark-primary-color': true,
     });
 
     return (

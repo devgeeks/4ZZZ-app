@@ -7,6 +7,10 @@ import {
 import {
   NOW_PLAYING_REQUESTED, NOW_PLAYING_RECEIVED,
 } from 'actions/nowPlayingActions';
+import {
+  SET_AUDIO_STATUS, PLAY_AUDIO, STOP_AUDIO,
+  AUDIO_OBJECT_CREATED, AUDIO_OBJECT_DESTROYED,
+} from 'actions/audioActions';
 
 let url = 'http://4zzzfm.org.au:41021';
 if (process.env.NODE_ENV !== 'production') {
@@ -39,7 +43,6 @@ function guide(state = {
         error: null,
       };
     case GUIDE_DATA_PARSED:
-      console.log(action.guide);
       return {
         ...state,
         programme: action.guide.programme,
@@ -85,9 +88,44 @@ function nowPlaying(state = {
   }
 }
 
+function media(state = {
+  url: 'http://stream.4zzzfm.org.au:789/;',
+  status: 'stopped',
+  audio: null,
+  duration: '0:00',
+  isPlaying: false,
+  isPending: false,
+  error: null,
+}, action) {
+  switch (action.type) {
+    case SET_AUDIO_STATUS:
+      console.log(action.type);
+      return {
+        ...state,
+        status,
+      };
+    case PLAY_AUDIO:
+      console.log(action.type);
+      return state;
+    case STOP_AUDIO:
+      console.log(action.type);
+      return state;
+    case AUDIO_OBJECT_CREATED:
+      console.log(action.type);
+      return state;
+    case AUDIO_OBJECT_DESTROYED:
+      console.log(action.type);
+      return state;
+    default:
+      return state;
+  }
+}
+
+
 const rootReducer = combineReducers({
   guideDataUrl,
   guide,
+  media,
   nowPlaying,
 });
 

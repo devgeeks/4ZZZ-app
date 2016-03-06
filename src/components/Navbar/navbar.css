@@ -5,7 +5,8 @@
   left: 0;
   height: 56px;
   overflow: hidden;
-  background: #efefef;
+  color: #ffffff;
+  opacity: 0.95;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
@@ -18,9 +19,7 @@
   line-height: 56px;
   overflow: hidden;
   text-align: center;
-  font-size: 120%;
-  font-weight: bold;
-  color: #13567b;
+  font-size: 130%;
 }
 
 .navbar .button.left,
@@ -47,11 +46,11 @@
 }
 
 .navbar .button svg {
-  fill: #13567b;
+  fill: #CFD8DC;
 }
 
 .navbar .button.tappable-active svg {
-  fill: #1d84bd;
+  fill: #ffffff;
   -webkit-transform: scale(1.2, 1.2);
           transform: scale(1.2, 1.2);
 }

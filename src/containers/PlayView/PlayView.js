@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { determineNowPlayingIfNeeded } from 'actions/nowPlayingActions';
+import { playAudio, stopAudio, setAudioStatus } from 'actions/audioActions';
 
 import PlaybackPane from 'components/PlaybackPane';
 import Navbar from 'components/Navbar';
@@ -44,6 +45,7 @@ const PlayView = React.createClass({
   displayName: 'PlayView',
 
   propTypes: {
+    audio: React.PropTypes.object,
     dispatch: React.PropTypes.func.isRequired,
     errorHandler: React.PropTypes.func,
     nowPlaying: React.PropTypes.object,
@@ -76,8 +78,10 @@ const PlayView = React.createClass({
 
   // @TODO consider if all of this should be a store with actions, etc
   handlePlaybackControlAction(type) {
+    const { dispatch } = this.props;
     switch (type) {
       case 'play':
+        dispatch(playAudio());
         console.log('pending');
         audio = new Audio(audioURL);
         audio.addEventListener('timeupdate', throttle(() => {
@@ -90,12 +94,14 @@ const PlayView = React.createClass({
             isPlaying: false,
             isPending: false,
           });
+          this.handlePlaybackControlAction('stop');
         }, false);
         audio.addEventListener('canplay', () => {
           console.log('audio can play');
           // Is this one needed?
         }, false);
         audio.addEventListener('waiting', () => {
+          dispatch(setAudioStatus('pending'));
           console.log('waiting');
           this.setState({
             isPlaying: true,
@@ -103,6 +109,7 @@ const PlayView = React.createClass({
           });
         }, false);
         audio.addEventListener('playing', () => {
+          dispatch(setAudioStatus('playing'));
           console.log('playing');
           this.setState({
             isPlaying: true,
@@ -110,20 +117,15 @@ const PlayView = React.createClass({
           });
         }, false);
         audio.addEventListener('ended', () => {
+          dispatch(setAudioStatus('stopped'));
           console.log('ended');
           this.setState({
             isPlaying: false,
             isPending: false,
           });
         }, false);
-        audio.addEventListener('error', (err) => {
-          console.error('error', err);
-          this.setState({
-            isPlaying: false,
-            isPending: false,
-          });
-        }, false);
         audio.addEventListener('stalled', () => {
+          dispatch(setAudioStatus('stopped'));
           console.log('stalled');
           this.setState({
             isPlaying: false,
@@ -136,6 +138,7 @@ const PlayView = React.createClass({
       case 'pending':
       case 'stop':
       default:
+        dispatch(stopAudio());
         console.log('stopping');
         if (audio) audio.pause();
         audio = null;
@@ -184,8 +187,9 @@ const PlayView = React.createClass({
 });
 
 function mapStateToProps(state) {
-  const { guide, nowPlaying } = state;
+  const { media, guide, nowPlaying } = state;
   return {
+    media,
     guide,
     nowPlaying,
   };

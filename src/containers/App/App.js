@@ -77,8 +77,9 @@ const App = React.createClass({
 });
 
 function mapStateToProps(state) {
-  const { guide } = state;
+  const { audio, guide } = state;
   return {
+    audio,
     guide,
   };
 }

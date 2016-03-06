@@ -38,6 +38,8 @@ export default React.createClass({
     const cx = classNames({
       'playback-controls': true,
       'is-playing': isPlaying,
+      'light-primary-color': true,
+      'primary-text-color': true,
       offline: !!offline,
     });
     return (

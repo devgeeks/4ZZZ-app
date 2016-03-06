@@ -36,8 +36,8 @@ ReactDOM.render((
   <Provider store={store}>
     <Router history={ hashHistory }>
       <Route component={ App }>
-        <Route path="play" component={ PlayView } />
-        <Redirect from="/" to="/play" />
+        <Route path="listen" component={ PlayView } />
+        <Redirect from="/" to="/listen" />
       </Route>
     </Router>
   </Provider>

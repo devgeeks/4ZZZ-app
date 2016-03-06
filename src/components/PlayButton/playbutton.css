@@ -5,7 +5,7 @@
 }
 
 .play-button svg {
-  fill: #13567b;
+  fill: #37474F;
 }
 
 .play-button.tappable-active {
@@ -14,5 +14,5 @@
 }
 
 .play-button.tappable-active svg {
-  fill: #1d84bd;
+  fill: #263238;
 }

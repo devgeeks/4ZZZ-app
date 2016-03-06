@@ -35,6 +35,10 @@ export default {
       let slotThisWeek;
       const nowPlayingSlotArr = shows.filter((slot) => {
         slotThisWeek = moment(slot.thisweek);
+        // If the API is returning next weeks show...
+        if (slotThisWeek > moment().add(3, 'days')) {
+          slotThisWeek.subtract(7, 'days');
+        }
         if (now > slotThisWeek && now < slotThisWeek.add(slot.duration, 'hours')) {
           return true;
         }

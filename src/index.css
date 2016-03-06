@@ -6,7 +6,6 @@ body {
   -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
   -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
   -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-  background: #455a64;
   font-family: 'HelveticaNeue-Light', 'HelveticaNeue', 'Roboto', Helvetica, Arial, sans-serif;
   font-size: 100%;
   height: 100%;
@@ -14,3 +13,14 @@ body {
   padding: 0px;
   width: 100%;
 }
+
+.status-bar					      { background: #263238; }
+.very-dark-primary-color	{ background: #37474F; }
+.dark-primary-color    		{ background: #455A64; }
+.default-primary-color 		{ background: #607D8B; }
+.light-primary-color   		{ background: #CFD8DC; }
+.text-primary-color    		{ color: #FFFFFF; }
+.accent-color          		{ background: #4CAF50; }
+.primary-text-color    		{ color: #212121; }
+.secondary-text-color  		{ color: #727272; }
+.divider-color         		{ border-color: #B6B6B6; }
