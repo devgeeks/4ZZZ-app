@@ -20,7 +20,8 @@ body {
 .default-primary-color 		{ background: #607D8B; }
 .light-primary-color   		{ background: #CFD8DC; }
 .text-primary-color    		{ color: #FFFFFF; }
-.accent-color          		{ background: #4CAF50; }
+/*.accent-color          		{ background: #4CAF50; }*/
+.accent-color          		{ background: #CFD8DC; }
 .primary-text-color    		{ color: #212121; }
 .secondary-text-color  		{ color: #727272; }
 .divider-color         		{ border-color: #B6B6B6; }

@@ -24,6 +24,7 @@ export default React.createClass({
 
     const cx = classNames({
       'now-playing': true,
+      'text-primary-color': true,
     });
 
     return (

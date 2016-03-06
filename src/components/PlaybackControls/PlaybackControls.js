@@ -38,8 +38,9 @@ export default React.createClass({
     const cx = classNames({
       'playback-controls': true,
       'is-playing': isPlaying,
-      'light-primary-color': true,
+      'accent-color': true,
       'primary-text-color': true,
+      //'text-primary-color': true, // set if accent colour needs a light inner
       offline: !!offline,
     });
     return (

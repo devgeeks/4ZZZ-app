@@ -30,7 +30,7 @@ describe('NowPlaying component', () => {
   it('should render correctly', () => {
     const { output } = setup();
     expect(output.type).toBe('div');
-    expect(output.props.className).toBe('now-playing');
+    expect(output.props.className).toBe('now-playing text-primary-color');
   });
   it('should render its children correctly', () => {
     const { output } = setup();
