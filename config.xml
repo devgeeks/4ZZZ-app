@@ -2,7 +2,7 @@
 <widget id="org.devgeeks.fourtriplezed" version="4.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>4ZZZ</name>
     <description>
-		  Hello World sample application using React, Webpack and Hot Reloading.
+      4ZZZ Radio App
 	  </description>
     <author email="tommy@devgeeks.org" href="http://devgeeks.org">
 		  Tommy-Carlos Williams
@@ -14,6 +14,8 @@
     <preference name="detect-data-types" value="true" />
     <preference name="android-minSdkVersion" value="14" />
     <preference name="android-installLocation" value="auto" />
+    <preference name="BackgroundColor" value="0xff455a64" />
+    <preference name="FadeSplashScreenDuration" value="300" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -35,4 +37,5 @@
     <plugin name="cordova-plugin-statusbar" spec="~2.1.0" />
     <plugin name="nl.x-services.plugins.backgroundaudio" spec="https://github.com/EddyVerbruggen/cordova-plugin-backgroundaudio" />
     <hook src="scripts/icons-hook.sh" type="after_platform_add" />
+    <plugin name="cordova-plugin-splashscreen" spec="~3.1.0" />
 </widget>

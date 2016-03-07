@@ -125,13 +125,14 @@ const PlayView = React.createClass({
           });
         }, false);
         audio.addEventListener('stalled', () => {
-          dispatch(setAudioStatus('stopped'));
+          dispatch(setAudioStatus('pending'));
           console.log('stalled');
+          audio.load();
           this.setState({
-            isPlaying: false,
-            isPending: false,
+            isPlaying: true,
+            isPending: true,
           });
-          this.handlePlaybackControlAction('stop');
+          audio.play();
         }, false);
         audio.play();
         break;
