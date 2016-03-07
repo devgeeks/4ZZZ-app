@@ -39,7 +39,8 @@ export default {
         if (slotThisWeek > moment().add(3, 'days')) {
           slotThisWeek.subtract(7, 'days');
         }
-        if (now > slotThisWeek && now < slotThisWeek.add(slot.duration, 'hours')) {
+        const slotEndThisWeek = slotThisWeek.clone().add(slot.duration, 'hours');
+        if (now > slotThisWeek && now < slotEndThisWeek) {
           return true;
         }
       });
