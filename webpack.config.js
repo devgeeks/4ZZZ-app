@@ -22,7 +22,8 @@ const common = {
     path: PATHS.build,
     filename: 'bundle.js',
   },
-  devtool: 'source-map',
+  //devtool: 'source-map',
+  devtool: 'cheap-module-inline-source-map',
   resolve: {
     alias: {
       actions: `${__dirname}/src/actions/`,
