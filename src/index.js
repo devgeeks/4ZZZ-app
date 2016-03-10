@@ -6,6 +6,7 @@ import { hashHistory } from 'react-router';
 
 import App from 'containers/App';
 import PlayView from 'containers/PlayView';
+import GuideView from 'containers/GuideView';
 import configureStore from 'stores/configureStore';
 
 //const offlineCheckUrl = 'http://4zzzfm.org.au:41021';
@@ -37,6 +38,8 @@ ReactDOM.render((
     <Router history={ hashHistory }>
       <Route component={ App }>
         <Route path="listen" component={ PlayView } />
+        <Route path="info" component={ PlayView } />
+        <Route path="guide" component={ GuideView } />
         <Redirect from="/" to="/listen" />
       </Route>
     </Router>

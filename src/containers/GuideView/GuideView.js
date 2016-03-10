@@ -1,25 +1,46 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Tappable from 'react-tappable';
+import MdEventNote from 'react-icons/lib/md/event-note';
+import MdClose from 'react-icons/lib/md/close';
+
+import GuidePane from 'components/GuidePane';
+import Navbar from 'components/Navbar';
 
 const GuideView = React.createClass({
 
   displayName: 'GuideView',
 
-  propTypes: {
-    history: React.PropTypes.object,
+  contextTypes: {
+    router: React.PropTypes.object.isRequired,
+  },
+
+  handleGuideButtonClick() {
+    const { router } = this.context;
+    router.push('/listen');
   },
 
   render() {
     return (
-      <div />
+      <GuidePane>
+        <Navbar>
+          <div className="title">Guide</div>
+          <Tappable className="button right" component="a" classBase="tappable"
+            onTap={ this.handleGuideButtonClick }
+          >
+            <MdClose size="24" />
+          </Tappable>
+        </Navbar>
+      </GuidePane>
     );
   },
 });
 
 function mapStateToProps(state) {
-  const { guide } = state;
+  const { guide, nowPlaying } = state;
   return {
     guide,
+    nowPlaying,
   };
 }
 

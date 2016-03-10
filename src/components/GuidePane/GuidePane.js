@@ -1,20 +1,19 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import './navbar.css';
+import './guidepane.css';
 
 export default React.createClass({
 
-  displayName: 'Navbar',
+  displayName: 'GuidePane',
 
   propTypes: {
-    children: React.PropTypes.array,
+    children: React.PropTypes.object,
   },
 
   render() {
     const cx = classNames({
-      navbar: true,
-      'very-dark-primary-color': true,
+      'guide-pane': true,
     });
 
     return (

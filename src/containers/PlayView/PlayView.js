@@ -1,44 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Tappable from 'react-tappable';
+import MdEventNote from 'react-icons/lib/md/event-note';
+import MdInfoOutline from 'react-icons/lib/md/info-outline';
 
 import { determineNowPlayingIfNeeded } from 'actions/nowPlayingActions';
-import { playAudio, stopAudio, setAudioStatus } from 'actions/audioActions';
 
+import NowPlaying from 'components/NowPlaying';
 import PlaybackPane from 'components/PlaybackPane';
 import Navbar from 'components/Navbar';
-import PlaybackControls from 'components/PlaybackControls';
-import NowPlaying from 'components/NowPlaying';
-import PlayButton from 'components/PlayButton';
-import StopButton from 'components/StopButton';
-import PendingButton from 'components/PendingButton';
-
-const audioURL = 'http://stream.4zzzfm.org.au:789/;';
-let audio;
-
-function hhmmss(secs) {
-  let s1 = Math.floor(secs);
-  const h1 = Math.floor(s1 / (60 * 60));
-  s1 %= 60 * 60;
-  const m1 = Math.floor(s1 / 60);
-  s1 %= 60;
-  const h2 = h1 ? `${h1}:` : '';
-  const m2 = h1 && m1 < 10 ? `0${m1}` : m1;
-  const s2 = s1 < 10 ? `0${s1}` : s1;
-  return `${h2}${m2}:${s2}`;
-}
-
-function throttle(callback, limit) {
-  let wait = false;
-  return () => {
-    if (!wait) {
-      callback.call();
-      wait = true;
-      setTimeout(() => {
-        wait = false;
-      }, limit);
-    }
-  };
-}
 
 const PlayView = React.createClass({
 
@@ -53,12 +23,8 @@ const PlayView = React.createClass({
     guide: React.PropTypes.object,
   },
 
-  getInitialState() {
-    return {
-      currentPosition: '0:00',
-      isPending: false,
-      isPlaying: false,
-    };
+  contextTypes: {
+    router: React.PropTypes.object.isRequired,
   },
 
   componentWillMount() {
@@ -76,113 +42,42 @@ const PlayView = React.createClass({
     }
   },
 
-  // @TODO consider if all of this should be a store with actions, etc
-  handlePlaybackControlAction(type) {
-    const { dispatch } = this.props;
-    switch (type) {
-      case 'play':
-        dispatch(playAudio());
-        console.log('pending');
-        audio = new Audio(audioURL);
-        audio.addEventListener('timeupdate', throttle(() => {
-          if (!audio) return;
-          this.setState({ currentPosition: hhmmss(audio.currentTime) });
-        }, 1000), false);
-        audio.addEventListener('error', (error) => {
-          console.error('error', error);
-          this.setState({
-            isPlaying: false,
-            isPending: false,
-          });
-          this.handlePlaybackControlAction('stop');
-        }, false);
-        audio.addEventListener('canplay', () => {
-          console.log('audio can play');
-          // Is this one needed?
-        }, false);
-        audio.addEventListener('waiting', () => {
-          dispatch(setAudioStatus('pending'));
-          console.log('waiting');
-          this.setState({
-            isPlaying: true,
-            isPending: true,
-          });
-        }, false);
-        audio.addEventListener('playing', () => {
-          dispatch(setAudioStatus('playing'));
-          console.log('playing');
-          this.setState({
-            isPlaying: true,
-            isPending: false,
-          });
-        }, false);
-        audio.addEventListener('ended', () => {
-          dispatch(setAudioStatus('stopped'));
-          console.log('ended');
-          this.setState({
-            isPlaying: false,
-            isPending: false,
-          });
-        }, false);
-        audio.addEventListener('stalled', () => {
-          dispatch(setAudioStatus('pending'));
-          console.log('stalled');
-          audio.load();
-          this.setState({
-            isPlaying: true,
-            isPending: true,
-          });
-          audio.play();
-        }, false);
-        audio.play();
-        break;
-      case 'pending':
-      case 'stop':
-      default:
-        dispatch(stopAudio());
-        console.log('stopping');
-        if (audio) audio.pause();
-        audio = null;
-        this.setState({
-          currentPosition: '0:00',
-          isPending: false,
-          isPlaying: false,
-        });
-    }
+  componentWillUnmount() {
+    clearInterval(window.nowPlayingTimer);
+  },
+
+  handleInfoButtonClick() {
+    const { router } = this.context;
+    router.push('/info');
+  },
+
+  handleGuideButtonClick() {
+    const { router } = this.context;
+    router.push('/guide');
   },
 
   render() {
-    const { currentPosition, isPending, isPlaying } = this.state;
     const { nowPlaying } = this.props;
 
-    // Default to the play button
-    let controls = <PlayButton handleClick={ this.handlePlaybackControlAction } />;
-    if (isPending) {
-      controls = (
-        <PendingButton handleClick={ this.handlePlaybackControlAction }>
-          <span className="loading-message">Loading...</span>
-        </PendingButton>
-      );
-    } else if (isPlaying) {
-      controls = (
-        <StopButton handleClick={ this.handlePlaybackControlAction }>
-          <span className="playback-duration">{ currentPosition || '0:00' }</span>
-        </StopButton>
-      );
-    } else {
-      controls = <PlayButton handleClick={ this.handlePlaybackControlAction } />;
-    }
-
     return (
-      <PlaybackPane>
-        <Navbar />
-        <NowPlaying nowPlaying={ nowPlaying } />
-        <PlaybackControls currentPosition={ currentPosition }
-          isPlaying={ isPlaying }
-        >
-          { controls }
-        </PlaybackControls>
-      </PlaybackPane>
+      <div>
+        <PlaybackPane>
+          <Navbar>
+            <Tappable className="button left" component="a" classBase="tappable"
+              onTap={ this.handleInfoButtonClick }
+            >
+              <MdInfoOutline size="24" />
+            </Tappable>
+            <div className="title">Listen</div>
+            <Tappable className="button right" component="a" classBase="tappable"
+              onTap={ this.handleGuideButtonClick }
+            >
+              <MdEventNote size="24" />
+            </Tappable>
+          </Navbar>
+          <NowPlaying nowPlaying={ nowPlaying } />
+        </PlaybackPane>
+      </div>
     );
   },
 });
