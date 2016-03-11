@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Tappable from 'react-tappable';
-import MdEventNote from 'react-icons/lib/md/event-note';
 import MdClose from 'react-icons/lib/md/close';
 
 import GuidePane from 'components/GuidePane';
@@ -24,7 +23,7 @@ const GuideView = React.createClass({
     return (
       <GuidePane>
         <Navbar>
-          <div className="title">Guide</div>
+          <div className="title">Program Guide</div>
           <Tappable className="button right" component="a" classBase="tappable"
             onTap={ this.handleGuideButtonClick }
           >

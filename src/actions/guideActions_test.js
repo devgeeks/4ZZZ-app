@@ -41,7 +41,7 @@ describe('guide actions', () => {
 
     // Expected result after parsing
     const guide = {
-      programme: {
+      program: {
         Tuesday: {
           '2016-03-01T23:00:00+11:00': {
             broadcasters: 'Mark',
@@ -83,7 +83,7 @@ describe('guide actions', () => {
     const store = mockStore({
       guideDataUrl: 'http://4zzzfm.org.au:41021',
       guide: {
-        programme: {},
+        program: {},
         isFetching: false,
         isParsing: false,
         fetched: null,

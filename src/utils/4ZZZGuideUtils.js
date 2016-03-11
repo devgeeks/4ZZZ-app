@@ -3,7 +3,7 @@ import moment from 'moment-timezone';
 export default {
   parseGuideData(guideData) {
     const guide = {
-      programme: {},
+      program: {},
       shows: [],
     };
     let slotLocalTime;
@@ -14,10 +14,10 @@ export default {
           if (guideData[day].hasOwnProperty(slot)) {
             guide.shows.push(guideData[day][slot]);
             slotLocalTime = moment(guideData[day][slot].thisweek);
-            if (!guide.programme[slotLocalTime.format('dddd')]) {
-              guide.programme[slotLocalTime.format('dddd')] = {};
+            if (!guide.program[slotLocalTime.format('dddd')]) {
+              guide.program[slotLocalTime.format('dddd')] = {};
             }
-            guide.programme[slotLocalTime.format('dddd')][slotLocalTime.format()]
+            guide.program[slotLocalTime.format('dddd')][slotLocalTime.format()]
               = guideData[day][slot];
           }
         }
