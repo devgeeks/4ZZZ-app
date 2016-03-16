@@ -12,10 +12,7 @@ import {
   AUDIO_OBJECT_CREATED, AUDIO_OBJECT_DESTROYED,
 } from 'actions/audioActions';
 
-let url = 'http://4zzzfm.org.au:41021';
-if (process.env.NODE_ENV !== 'production') {
-  url = 'data.json';
-}
+const url = 'http://4zzzfm.org.au:41021';
 
 function guideDataUrl(state = url, action) {
   switch (action.type) {

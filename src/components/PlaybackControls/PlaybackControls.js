@@ -19,16 +19,18 @@ export default React.createClass({
   },
 
   componentDidMount() {
-    //window.Offline.on('down', () => {
-      //this.setState({
-        //offline: true,
-      //});
-    //});
-    //window.Offline.on('confirmed-up', () => {
-      //this.setState({
-        //offline: false,
-      //});
-    //});
+    window.Offline.on('down', () => {
+      this.setState({
+        offline: true,
+      });
+    });
+    window.Offline.on('confirmed-up', () => {
+      setTimeout(() => {
+        this.setState({
+          offline: false,
+        });
+      }, 2000);
+    });
   },
 
   render() {

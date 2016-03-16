@@ -8,20 +8,36 @@
   background: #efefef;
 }
 
+.guide-pane .content {
+  position: absolute;
+  top: 56px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: auto;
+  /* make sure to clear the FAB */
+  padding: 16px 16px 112px 16px;
+}
+
 .routetransition-enter.guide-pane {
-  transform: translate(0, 100%);
+  transform: scale3d(0.95, 0.95, 0);
+  opacity: 0.1;
 }
 
 .routetransition-enter.routetransition-enter-active.guide-pane {
-  transform: translate(0, 0);
+  transform: scale3d(1, 1, 1);
+  opacity: 1;
   transition: all .3s ease-in-out;
 }
 
 .routetransition-leave.guide-pane {
-  transform: translate(0, 0);
+  transform: scale3d(1, 1, 1);
+  opacity: 1;
   transition: all .3s ease-in-out;
 }
 
 .routetransition-leave.routetransition-leave-active.guide-pane {
-  transform: translate(0, 100%);
+  transform: scale3d(0.95, 0.95, 0);
+  opacity: 0.1;
 }

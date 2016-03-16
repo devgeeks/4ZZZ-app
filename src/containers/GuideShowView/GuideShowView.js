@@ -6,48 +6,37 @@ import MdArrowBack from 'react-icons/lib/md/arrow-back';
 import GuidePane from 'components/GuidePane';
 import Navbar from 'components/Navbar';
 
-const GuideView = React.createClass({
+const GuideShowView = React.createClass({
 
-  displayName: 'GuideView',
-
-  propTypes: {
-    children: React.PropTypes.object,
-  },
+  displayName: 'GuideShowView',
 
   contextTypes: {
     router: React.PropTypes.object.isRequired,
   },
 
-  handleBackButtonClick() {
+  handleBackButtonClick(e) {
     const { router } = this.context;
+    e.preventDefault();
     router.goBack();
   },
 
   render() {
-    const days = (<GuidePane>
+    return (<GuidePane>
       <Navbar>
         <Tappable className="button left" component="a" classBase="tappable"
           onTap={ this.handleBackButtonClick }
         >
           <MdArrowBack size="24" />
         </Tappable>
-        <div className="title">Program</div>
+        <div className="title">Show</div>
       </Navbar>
-      <div className="content">list of days...</div>
+      <div className="content">show details...</div>
     </GuidePane>);
-    if (this.props.children) {
-      return React.cloneElement(this.props.children || <div/>, this.props);
-    }
-    return days;
   },
 });
 
 function mapStateToProps(state) {
-  const { guide, nowPlaying } = state;
-  return {
-    guide,
-    nowPlaying,
-  };
+  return { ...state };
 }
 
-export default connect(mapStateToProps)(GuideView);
+export default connect(mapStateToProps)(GuideShowView);
