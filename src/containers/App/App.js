@@ -8,53 +8,27 @@ import PlayButton from 'components/PlayButton';
 import StopButton from 'components/StopButton';
 import PendingButton from 'components/PendingButton';
 
-import { playAudio, stopAudio, setAudioStatus } from 'actions/audioActions';
+import { setAudioDuration, setAudioStatus } from 'actions/audioActions';
 import { fetchGuideDataIfNeeded } from 'actions/guideActions';
+
+import { throttle, hhmmss } from 'utils/AudioUtils';
 
 const audioURL = 'http://stream.4zzzfm.org.au:789/;';
 let audio;
-
-function hhmmss(secs) {
-  let s1 = Math.floor(secs);
-  const h1 = Math.floor(s1 / (60 * 60));
-  s1 %= 60 * 60;
-  const m1 = Math.floor(s1 / 60);
-  s1 %= 60;
-  const h2 = h1 ? `${h1}:` : '';
-  const m2 = h1 && m1 < 10 ? `0${m1}` : m1;
-  const s2 = s1 < 10 ? `0${s1}` : s1;
-  return `${h2}${m2}:${s2}`;
-}
-
-function throttle(callback, limit) {
-  let wait = false;
-  return () => {
-    if (!wait) {
-      callback.call();
-      wait = true;
-      setTimeout(() => {
-        wait = false;
-      }, limit);
-    }
-  };
-}
 
 const App = React.createClass({
 
   displayName: 'App',
 
   propTypes: {
-    audio: React.PropTypes.object,
+    media: React.PropTypes.object,
     children: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired,
+    location: PropTypes.object,
   },
 
   getInitialState() {
     return {
-      currentPosition: '0:00',
-      isPending: false,
-      isPlaying: false,
       error: {
         displayed: false,
         message: '',
@@ -91,62 +65,38 @@ const App = React.createClass({
     }, 2600);
   },
 
-  // @TODO consider if all of this should be a store with actions, etc
+  // @TODO - How much of this could be moved to utils?
+  //  or should it just be a PlaybackControlsContainer?
   handlePlaybackControlAction(type) {
     const { dispatch } = this.props;
     switch (type) {
       case 'play':
-        dispatch(playAudio());
         console.log('pending');
         audio = new Audio(audioURL);
         audio.addEventListener('timeupdate', throttle(() => {
           if (!audio) return;
-          this.setState({ currentPosition: hhmmss(audio.currentTime) });
+          dispatch(setAudioDuration(hhmmss(audio.currentTime)));
         }, 1000), false);
         audio.addEventListener('error', (error) => {
           console.error('error', error);
-          this.setState({
-            isPlaying: false,
-            isPending: false,
-          });
           this.handlePlaybackControlAction('stop');
+          dispatch(setAudioStatus('stopped'));
         }, false);
         audio.addEventListener('canplay', () => {
-          console.log('audio can play');
           // Is this one needed?
         }, false);
         audio.addEventListener('waiting', () => {
           dispatch(setAudioStatus('pending'));
-          console.log('waiting');
-          this.setState({
-            isPlaying: true,
-            isPending: true,
-          });
         }, false);
         audio.addEventListener('playing', () => {
           dispatch(setAudioStatus('playing'));
-          console.log('playing');
-          this.setState({
-            isPlaying: true,
-            isPending: false,
-          });
         }, false);
         audio.addEventListener('ended', () => {
           dispatch(setAudioStatus('stopped'));
-          console.log('ended');
-          this.setState({
-            isPlaying: false,
-            isPending: false,
-          });
         }, false);
         audio.addEventListener('stalled', () => {
           dispatch(setAudioStatus('pending'));
-          console.log('stalled');
           audio.load();
-          this.setState({
-            isPlaying: true,
-            isPending: true,
-          });
           audio.play();
         }, false);
         audio.play();
@@ -154,21 +104,17 @@ const App = React.createClass({
       case 'pending':
       case 'stop':
       default:
-        dispatch(stopAudio());
-        console.log('stopping');
+        dispatch(setAudioStatus('stopped'));
         if (audio) audio.pause();
         audio = null;
-        this.setState({
-          currentPosition: '0:00',
-          isPending: false,
-          isPlaying: false,
-        });
     }
   },
 
   render() {
-    const { currentPosition, isPending, isPlaying } = this.state;
-    const key = this.props.location.pathname;
+    const {
+      media: { duration, isPlaying, isPending },
+      location: { pathname: key },
+    } = this.props;
     const props = {
       key,
       errorHandler: this.errorHandler,
@@ -185,7 +131,7 @@ const App = React.createClass({
     } else if (isPlaying) {
       controls = (
         <StopButton handleClick={ this.handlePlaybackControlAction }>
-          <span className="playback-duration">{ currentPosition || '0:00' }</span>
+          <span className="playback-duration">{ duration || '0:00' }</span>
         </StopButton>
       );
     } else {
@@ -202,7 +148,7 @@ const App = React.createClass({
         >
           { React.cloneElement(this.props.children || <div />, props) }
         </CSSTransitionGroup>
-        <PlaybackControls currentPosition={ currentPosition }
+        <PlaybackControls currentPosition={ duration }
           isPlaying={ isPlaying }
         >
           { controls }
@@ -213,8 +159,9 @@ const App = React.createClass({
 });
 
 function mapStateToProps(state) {
-  const { guide } = state;
+  const { media, guide } = state;
   return {
+    media,
     guide,
   };
 }

@@ -8,7 +8,7 @@ import {
   NOW_PLAYING_REQUESTED, NOW_PLAYING_RECEIVED,
 } from 'actions/nowPlayingActions';
 import {
-  SET_AUDIO_STATUS, PLAY_AUDIO, STOP_AUDIO,
+  SET_AUDIO_STATUS, SET_AUDIO_DURATION, PLAY_AUDIO, STOP_AUDIO,
   AUDIO_OBJECT_CREATED, AUDIO_OBJECT_DESTROYED,
 } from 'actions/audioActions';
 
@@ -99,17 +99,36 @@ function media(state = {
       console.log(action.type);
       return {
         ...state,
+        isPending: action.isPending,
+        isPlaying: action.isPlaying,
+        error: null,
         status,
+      };
+    case SET_AUDIO_DURATION:
+      console.log(action.type);
+      return {
+        ...state,
+        duration: action.duration,
       };
     case PLAY_AUDIO:
       console.log(action.type);
-      return state;
+      return {
+        ...state,
+        error: null,
+      };
     case STOP_AUDIO:
       console.log(action.type);
-      return state;
+      return {
+        ...state,
+        audio: action.audio,
+        error: null,
+      };
     case AUDIO_OBJECT_CREATED:
       console.log(action.type);
-      return state;
+      return {
+        audio: action.audio,
+        error: null,
+      };
     case AUDIO_OBJECT_DESTROYED:
       console.log(action.type);
       return state;
