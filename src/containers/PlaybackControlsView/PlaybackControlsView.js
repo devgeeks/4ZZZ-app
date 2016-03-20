@@ -13,6 +13,7 @@ const PlaybackControlsView = React.createClass({
   displayName: 'PlaybackControlsView',
 
   propTypes: {
+    errorHandler: React.PropTypes.func,
     dispatch: React.PropTypes.func.isRequired,
     media: React.PropTypes.object,
   },
@@ -20,7 +21,7 @@ const PlaybackControlsView = React.createClass({
   audio: null,
 
   createAudio() {
-    const { dispatch } = this.props;
+    const { dispatch, errorHandler } = this.props;
     const audioURL = 'http://stream.4zzzfm.org.au:789/;';
     this.audio = new Audio(audioURL);
     this.audio.addEventListener('timeupdate', throttle(() => {
@@ -29,6 +30,11 @@ const PlaybackControlsView = React.createClass({
     }, 1000), false);
     this.audio.addEventListener('error', (error) => {
       console.error('error', error);
+      errorHandler({
+        error: new Error(),
+        msg: `There was an error playing back the stream.
+          Make sure your device has an internet connection.`,
+      });
       this.handlePlaybackControlAction('stop');
       dispatch(setAudioStatus('stopped'));
     }, false);

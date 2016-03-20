@@ -53,7 +53,7 @@ const App = React.createClass({
           message: '',
         },
       });
-    }, 2600);
+    }, 3600);
   },
 
   render() {
