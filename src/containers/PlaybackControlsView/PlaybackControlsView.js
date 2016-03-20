@@ -8,9 +8,6 @@ import PendingButton from 'components/PendingButton';
 import { setAudioDuration, setAudioStatus } from 'actions/audioActions';
 import { throttle, hhmmss } from 'utils/AudioUtils';
 
-const audioURL = 'http://stream.4zzzfm.org.au:789/;';
-let audio;
-
 const PlaybackControlsView = React.createClass({
 
   displayName: 'PlaybackControlsView',
@@ -20,47 +17,54 @@ const PlaybackControlsView = React.createClass({
     media: React.PropTypes.object,
   },
 
+  audio: null,
+
+  createAudio() {
+    const { dispatch } = this.props;
+    const audioURL = 'http://stream.4zzzfm.org.au:789/;';
+    this.audio = new Audio(audioURL);
+    this.audio.addEventListener('timeupdate', throttle(() => {
+      if (!this.audio) return;
+      dispatch(setAudioDuration(hhmmss(this.audio.currentTime)));
+    }, 1000), false);
+    this.audio.addEventListener('error', (error) => {
+      console.error('error', error);
+      this.handlePlaybackControlAction('stop');
+      dispatch(setAudioStatus('stopped'));
+    }, false);
+    this.audio.addEventListener('canplay', () => {
+      // Is this one needed?
+    }, false);
+    this.audio.addEventListener('waiting', () => {
+      dispatch(setAudioStatus('pending'));
+    }, false);
+    this.audio.addEventListener('playing', () => {
+      dispatch(setAudioStatus('playing'));
+    }, false);
+    this.audio.addEventListener('ended', () => {
+      dispatch(setAudioStatus('stopped'));
+    }, false);
+    this.audio.addEventListener('stalled', () => {
+      // 'stalled' was being called sometimes after stop
+      if (this.audio) {
+        dispatch(setAudioStatus('pending'));
+        this.audio.load();
+        this.audio.play();
+      }
+    }, false);
+  },
+
   // @TODO - How much of this could be moved to utils?
   handlePlaybackControlAction(type) {
     const { dispatch } = this.props;
-    switch (type) {
-      case 'play':
-        console.log('pending');
-        audio = new Audio(audioURL);
-        audio.addEventListener('timeupdate', throttle(() => {
-          if (!audio) return;
-          dispatch(setAudioDuration(hhmmss(audio.currentTime)));
-        }, 1000), false);
-        audio.addEventListener('error', (error) => {
-          console.error('error', error);
-          this.handlePlaybackControlAction('stop');
-          dispatch(setAudioStatus('stopped'));
-        }, false);
-        audio.addEventListener('canplay', () => {
-          // Is this one needed?
-        }, false);
-        audio.addEventListener('waiting', () => {
-          dispatch(setAudioStatus('pending'));
-        }, false);
-        audio.addEventListener('playing', () => {
-          dispatch(setAudioStatus('playing'));
-        }, false);
-        audio.addEventListener('ended', () => {
-          dispatch(setAudioStatus('stopped'));
-        }, false);
-        audio.addEventListener('stalled', () => {
-          dispatch(setAudioStatus('pending'));
-          audio.load();
-          audio.play();
-        }, false);
-        audio.play();
-        break;
-      case 'pending':
-      case 'stop':
-      default:
-        dispatch(setAudioStatus('stopped'));
-        if (audio) audio.pause();
-        audio = null;
+    if (type === 'play') {
+      console.log('pending');
+      this.createAudio();
+      this.audio.play();
+    } else {
+      dispatch(setAudioStatus('stopped'));
+      if (this.audio) this.audio.pause();
+      this.audio = null;
     }
   },
 

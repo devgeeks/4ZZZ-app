@@ -58,8 +58,6 @@ const App = React.createClass({
 
   render() {
     const {
-      dispatch,
-      media,
       location: { pathname: key },
     } = this.props;
     const props = {
@@ -77,7 +75,7 @@ const App = React.createClass({
         >
           { React.cloneElement(this.props.children || <div />, props) }
         </CSSTransitionGroup>
-        <PlaybackControlsView />
+        <PlaybackControlsView errorHandler={ this.errorHandler } />
       </div>
     );
   },
