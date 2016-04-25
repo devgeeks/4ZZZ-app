@@ -9,8 +9,7 @@
 }
 
 .play-button.tappable-active {
-  -webkit-transform: scale(1.2, 1.2);
-          transform: scale(1.2, 1.2);
+  transform: scale(1.2, 1.2);
 }
 
 .play-button.tappable-active svg {

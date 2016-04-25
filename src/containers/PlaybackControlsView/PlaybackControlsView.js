@@ -16,19 +16,85 @@ const PlaybackControlsView = React.createClass({
     errorHandler: React.PropTypes.func,
     dispatch: React.PropTypes.func.isRequired,
     media: React.PropTypes.object,
+    nowPlaying: React.PropTypes.object,
+  },
+
+  componentDidMount() {
+    document.addEventListener('deviceready', () => {
+      console.log('device ready!');
+
+      if (window.RemoteCommand) {
+        window.RemoteCommand.on('command', command => {
+          switch (command) {
+            case 'play':
+              this.handlePlaybackControlAction('play');
+              break;
+            case 'pause':
+              this.handlePlaybackControlAction('stop');
+              break;
+            default:
+              break;
+          }
+        });
+        window.RemoteCommand.enabled('nextTrack', false);
+        window.RemoteCommand.enabled('previousTrack', false);
+      }
+      if (window.MusicControls) {
+        window.MusicControls.subscribe((action) => {
+          switch (action) {
+            case 'music-controls-play':
+              this.handlePlaybackControlAction('play');
+              break;
+            case 'music-controls-pause':
+              this.handlePlaybackControlAction('stop');
+              break;
+            default:
+              break;
+          }
+        });
+      }
+    });
+  },
+
+  setNowPlayingControls() {
+    const { nowPlaying: { show: { name, broadcasters } } } = this.props;
+    window.NowPlaying && window.NowPlaying.set({
+      artwork: 'http://cart.4zzzfm.org.au/includes/templates/classic/images/4ZZZ_CIRC.png',
+      albumTitle: broadcasters,
+      artist: name,
+      title: '4ZZZ',
+    });
+    window.MusicControls && window.MusicControls.create({
+      track: `${name} - ${broadcasters}`,
+      artist: '4ZZZ',
+      cover: 'http://cart.4zzzfm.org.au/includes/templates/classic/images/4ZZZ_CIRC.png',
+      isPlaying: false,
+      dismissable: false,
+      // hide previous/next/close buttons:
+      hasPrev: false,
+      hasNext: false,
+      hasClose: false,
+    }, () => true, err => console.error(err));
+    window.MusicControls && window.MusicControls.listen();
   },
 
   audio: null,
 
-  createAudio() {
+  createOrPlayAudio() {
+    if (this.audio) {
+      this.audio.play();
+      return;
+    }
     const { dispatch, errorHandler } = this.props;
     const audioURL = 'http://stream.4zzzfm.org.au:789/;';
-    this.audio = new Audio(audioURL);
+    this.audio = window.audio = new Audio(audioURL);
+    this.audio.play();
     this.audio.addEventListener('timeupdate', throttle(() => {
-      if (!this.audio) return;
+      this.setNowPlayingControls();
       dispatch(setAudioDuration(hhmmss(this.audio.currentTime)));
     }, 1000), false);
     this.audio.addEventListener('error', (error) => {
+      console.log('ERROR');
       console.error('error', error);
       errorHandler({
         error: new Error(),
@@ -39,38 +105,64 @@ const PlaybackControlsView = React.createClass({
       dispatch(setAudioStatus('stopped'));
     }, false);
     this.audio.addEventListener('canplay', () => {
+      console.log('CAN PLAY');
+      // Is this one needed?
+    }, false);
+    this.audio.addEventListener('emptied', () => {
+      console.log('EMPTIED');
+      // Is this one needed?
+    }, false);
+    this.audio.addEventListener('abort', () => {
+      console.log('ABORT');
+      // Is this one needed?
+    }, false);
+    this.audio.addEventListener('suspend', () => {
+      console.log('SUSPEND');
       // Is this one needed?
     }, false);
     this.audio.addEventListener('waiting', () => {
+      console.log('WAITING');
       dispatch(setAudioStatus('pending'));
     }, false);
-    this.audio.addEventListener('playing', () => {
+    this.audio.addEventListener('play', () => {
+      console.log('PLAY');
       dispatch(setAudioStatus('playing'));
+      window.MusicControls && window.MusicControls.updateIsPlaying(true);
+    }, false);
+    this.audio.addEventListener('playing', () => {
+      console.log('PLAYING');
+      dispatch(setAudioStatus('playing'));
+      window.MusicControls && window.MusicControls.updateIsPlaying(true);
+    }, false);
+    this.audio.addEventListener('emptied', () => {
+      console.log('EMPTIED');
     }, false);
     this.audio.addEventListener('ended', () => {
+      console.log('ENDED');
+    }, false);
+    this.audio.addEventListener('pause', () => {
+      console.log('PAUSE');
       dispatch(setAudioStatus('stopped'));
+      window.MusicControls && window.MusicControls.updateIsPlaying(false);
     }, false);
     this.audio.addEventListener('stalled', () => {
+      console.log('STALLED');
       // 'stalled' was being called sometimes after stop
-      if (this.audio) {
-        dispatch(setAudioStatus('pending'));
-        this.audio.load();
-        this.audio.play();
-      }
+      //dispatch(setAudioStatus('pending'));
+      //this.audio.load();
+      //this.audio.play();
     }, false);
   },
 
-  // @TODO - How much of this could be moved to utils?
   handlePlaybackControlAction(type) {
     const { dispatch } = this.props;
     if (type === 'play') {
-      console.log('pending');
-      this.createAudio();
-      this.audio.play();
+      this.createOrPlayAudio();
     } else {
       dispatch(setAudioStatus('stopped'));
-      if (this.audio) this.audio.pause();
-      this.audio = null;
+      if (this.audio) {
+        this.audio.pause();
+      }
     }
   },
 
@@ -109,9 +201,10 @@ const PlaybackControlsView = React.createClass({
 });
 
 function mapStateToProps(state) {
-  const { media } = state;
+  const { media, nowPlaying } = state;
   return {
     media,
+    nowPlaying,
   };
 }
 

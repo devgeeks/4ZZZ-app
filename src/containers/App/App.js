@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 
@@ -13,9 +13,9 @@ const App = React.createClass({
 
   propTypes: {
     media: React.PropTypes.object,
-    children: PropTypes.object,
-    dispatch: PropTypes.func.isRequired,
-    location: PropTypes.object,
+    children: React.PropTypes.object,
+    dispatch: React.PropTypes.func.isRequired,
+    location: React.PropTypes.object,
   },
 
   getInitialState() {

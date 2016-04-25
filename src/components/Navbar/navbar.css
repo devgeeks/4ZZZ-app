@@ -51,6 +51,5 @@
 
 .navbar .button.tappable-active svg {
   fill: #ffffff;
-  -webkit-transform: scale(1.2, 1.2);
-          transform: scale(1.2, 1.2);
+  transform: scale(1.2, 1.2);
 }

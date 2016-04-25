@@ -1,12 +1,20 @@
 const merge = require('webpack-merge');
 const path = require('path');
 const webpack = require('webpack');
+const precss = require('precss');
+const autoprefixer = require('autoprefixer');
 
 const ENV = require('./env');
 const PATHS = {
   src: path.join(__dirname, 'src'),
   build: path.join(__dirname, 'www'),
 };
+
+const cssLoaders = [
+  'style-loader',
+  'css-loader?url=false',
+  'postcss-loader',
+];
 
 const definePlugin = new webpack.DefinePlugin({
   'process.env': {
@@ -23,7 +31,7 @@ const common = {
     filename: 'bundle.js',
   },
   //devtool: 'source-map',
-  devtool: 'cheap-module-inline-source-map',
+  devtool: 'source-map',
   resolve: {
     alias: {
       actions: `${__dirname}/src/actions/`,
@@ -34,11 +42,14 @@ const common = {
       utils: `${__dirname}/src/utils/`,
     },
   },
+  postcss() {
+    return [autoprefixer, precss];
+  },
   module: {
     loaders: [
       {
         test: /\.css$/,
-        loaders: ['style', 'css?url=false'],
+        loader: cssLoaders.join('!'),
         includes: [PATHS.src, PATHS.node_modules],
       },
       {

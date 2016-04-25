@@ -8,15 +8,12 @@
 
 .pending-button svg {
   fill: #37474F;
-  -webkit-transform: rotate(33deg);
   transform: rotate(33deg);
-  -webkit-animation: rotating 750ms ease-in-out infinite;
-          animation: rotating 750ms ease-in-out infinite;
+  animation: rotating 750ms ease-in-out infinite;
 }
 
 .pending-button.tappable-active {
-  -webkit-transform: scale(1.2, 1.2);
-          transform: scale(1.2, 1.2);
+  transform: scale(1.2, 1.2);
 }
 
 .pending-button.tappable-active svg {
@@ -25,21 +22,17 @@
 
 @-webkit-keyframes rotating /* Safari and Chrome */ {
   from {
-    -webkit-transform: rotate(33deg);
     transform: rotate(33deg);
   }
   to {
-    -webkit-transform: rotate(393deg);
     transform: rotate(393deg);
   }
 }
 @keyframes rotating {
   from {
-    -webkit-transform: rotate(33deg);
     transform: rotate(33deg);
   }
   to {
-    -webkit-transform: rotate(393deg);
     transform: rotate(393deg);
   }
 }
