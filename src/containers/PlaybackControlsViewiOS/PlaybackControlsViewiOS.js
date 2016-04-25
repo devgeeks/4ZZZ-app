@@ -8,9 +8,9 @@ import PendingButton from 'components/PendingButton';
 import { setAudioDuration, setAudioStatus } from 'actions/audioActions';
 import { throttle, hhmmss } from 'utils/AudioUtils';
 
-const PlaybackControlsView = React.createClass({
+const PlaybackControlsViewiOS = React.createClass({
 
-  displayName: 'PlaybackControlsView',
+  displayName: 'PlaybackControlsViewiOS',
 
   propTypes: {
     errorHandler: React.PropTypes.func,
@@ -39,20 +39,6 @@ const PlaybackControlsView = React.createClass({
         window.RemoteCommand.enabled('nextTrack', false);
         window.RemoteCommand.enabled('previousTrack', false);
       }
-      if (window.MusicControls) {
-        window.MusicControls.subscribe((action) => {
-          switch (action) {
-            case 'music-controls-play':
-              this.handlePlaybackControlAction('play');
-              break;
-            case 'music-controls-pause':
-              this.handlePlaybackControlAction('stop');
-              break;
-            default:
-              break;
-          }
-        });
-      }
     });
   },
 
@@ -64,18 +50,6 @@ const PlaybackControlsView = React.createClass({
       artist: name,
       title: '4ZZZ',
     });
-    window.MusicControls && window.MusicControls.create({
-      track: `${name} - ${broadcasters}`,
-      artist: '4ZZZ',
-      cover: 'http://cart.4zzzfm.org.au/includes/templates/classic/images/4ZZZ_CIRC.png',
-      isPlaying: false,
-      dismissable: false,
-      // hide previous/next/close buttons:
-      hasPrev: false,
-      hasNext: false,
-      hasClose: false,
-    }, () => true, err => console.error(err));
-    window.MusicControls && window.MusicControls.listen();
   },
 
   audio: null,
@@ -127,12 +101,10 @@ const PlaybackControlsView = React.createClass({
     this.audio.addEventListener('play', () => {
       console.log('PLAY');
       dispatch(setAudioStatus('playing'));
-      window.MusicControls && window.MusicControls.updateIsPlaying(true);
     }, false);
     this.audio.addEventListener('playing', () => {
       console.log('PLAYING');
       dispatch(setAudioStatus('playing'));
-      window.MusicControls && window.MusicControls.updateIsPlaying(true);
     }, false);
     this.audio.addEventListener('emptied', () => {
       console.log('EMPTIED');
@@ -143,7 +115,6 @@ const PlaybackControlsView = React.createClass({
     this.audio.addEventListener('pause', () => {
       console.log('PAUSE');
       dispatch(setAudioStatus('stopped'));
-      window.MusicControls && window.MusicControls.updateIsPlaying(false);
     }, false);
     this.audio.addEventListener('stalled', () => {
       console.log('STALLED');
@@ -208,4 +179,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(PlaybackControlsView);
+export default connect(mapStateToProps)(PlaybackControlsViewiOS);

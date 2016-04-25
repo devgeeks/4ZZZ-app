@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 
 import ErrorDialog from 'components/ErrorDialog';
-import PlaybackControlsView from 'containers/PlaybackControlsView';
+import PlaybackControlsViewiOS from 'containers/PlaybackControlsViewiOS';
+import PlaybackControlsViewAndroid from 'containers/PlaybackControlsViewAndroid';
 
 import { fetchGuideDataIfNeeded } from 'actions/guideActions';
 
@@ -56,6 +57,11 @@ const App = React.createClass({
     }, 3600);
   },
 
+  isAndroid() {
+    const ua = navigator.userAgent.toLowerCase();
+    return ua.indexOf('android') > -1;
+  },
+
   render() {
     const {
       location: { pathname: key },
@@ -64,6 +70,10 @@ const App = React.createClass({
       key,
       errorHandler: this.errorHandler,
     };
+
+    const playBackControlsView = this.isAndroid()
+      ? <PlaybackControlsViewAndroid errorHandler={ this.errorHandler } />
+      : <PlaybackControlsViewiOS errorHandler={ this.errorHandler } />;
 
     return (
       <div className="app">
@@ -75,7 +85,7 @@ const App = React.createClass({
         >
           { React.cloneElement(this.props.children || <div />, props) }
         </CSSTransitionGroup>
-        <PlaybackControlsView errorHandler={ this.errorHandler } />
+        { playBackControlsView }
       </div>
     );
   },
