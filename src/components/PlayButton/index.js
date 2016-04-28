@@ -1,2 +1,1 @@
-import PlayButton from './PlayButton';
-export default PlayButton;
+export default from './PlayButton';

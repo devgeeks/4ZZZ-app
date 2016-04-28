@@ -1,2 +1,1 @@
-import NowPlaying from './NowPlaying';
-export default NowPlaying;
+export default from './NowPlaying';

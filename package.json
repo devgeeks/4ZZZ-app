@@ -31,6 +31,7 @@
     "autoprefixer": "^6.3.6",
     "babel-eslint": "^4.1.8",
     "babel-preset-react-hmre": "^1.0.1",
+    "babel-preset-stage-1": "^6.5.0",
     "babel-preset-stage-2": "^6.5.0",
     "cordova-icon": "^0.4.1",
     "cordova-splash": "^0.4.0",

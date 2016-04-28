@@ -1,2 +1,1 @@
-import PlayView from './PlayView';
-export default PlayView;
+export default from './PlayView';

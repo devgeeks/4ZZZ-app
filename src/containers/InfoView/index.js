@@ -1,2 +1,1 @@
-import InfoView from './InfoView';
-export default InfoView;
+export default from './InfoView';

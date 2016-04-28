@@ -1,2 +1,1 @@
-import GuideView from './GuideView';
-export default GuideView;
+export default from './GuideView';

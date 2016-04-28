@@ -6,7 +6,7 @@ import MdInfoOutline from 'react-icons/lib/md/info-outline';
 
 import { determineNowPlayingIfNeeded } from 'actions/nowPlayingActions';
 
-import { animatingView } from 'containers/AnimatedViews';
+import animateView from 'containers/react-animated-views';
 
 //import { isAndroid } from 'utils/Device';
 
@@ -98,4 +98,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default animatingView(connect(mapStateToProps)(PlayView));
+export default animateView(connect(mapStateToProps)(PlayView));

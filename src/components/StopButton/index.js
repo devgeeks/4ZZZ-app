@@ -1,2 +1,1 @@
-import StopButton from './StopButton';
-export default StopButton;
+export default from './StopButton';

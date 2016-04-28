@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Tappable from 'react-tappable';
 import MdArrowBack from 'react-icons/lib/md/arrow-back';
 
-import { animatingView } from 'containers/AnimatedViews';
+import animateView from 'containers/react-animated-views';
 
 import GuidePane from 'components/GuidePane';
 import Navbar from 'components/Navbar';
@@ -53,4 +53,4 @@ function mapStateToProps(state) {
   return { ...state };
 }
 
-export default animatingView(connect(mapStateToProps)(GuideShowView));
+export default animateView(connect(mapStateToProps)(GuideShowView));

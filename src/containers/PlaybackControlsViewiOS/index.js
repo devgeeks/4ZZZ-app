@@ -1,2 +1,1 @@
-import PlaybackControlsViewiOS from './PlaybackControlsViewiOS';
-export default PlaybackControlsViewiOS;
+export default from './PlaybackControlsViewiOS';

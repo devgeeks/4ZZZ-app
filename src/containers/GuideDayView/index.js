@@ -1,2 +1,1 @@
-import GuideDayView from './GuideDayView';
-export default GuideDayView;
+export default from './GuideDayView';

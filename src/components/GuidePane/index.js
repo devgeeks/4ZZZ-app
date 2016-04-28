@@ -1,2 +1,1 @@
-import GuidePane from './GuidePane';
-export default GuidePane;
+export default from './GuidePane';

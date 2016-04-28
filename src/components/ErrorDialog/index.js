@@ -1,2 +1,1 @@
-import ErrorDialog from './ErrorDialog';
-export default ErrorDialog;
+export default from './ErrorDialog';

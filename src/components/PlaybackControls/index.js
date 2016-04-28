@@ -1,2 +1,1 @@
-import PlaybackControls from './PlaybackControls';
-export default PlaybackControls;
+export default from './PlaybackControls';

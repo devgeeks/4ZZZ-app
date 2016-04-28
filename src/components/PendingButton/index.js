@@ -1,2 +1,1 @@
-import PendingButton from './PendingButton';
-export default PendingButton;
+export default from './PendingButton';

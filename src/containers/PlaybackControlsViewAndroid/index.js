@@ -1,2 +1,1 @@
-import PlaybackControlsViewAndroid from './PlaybackControlsViewAndroid';
-export default PlaybackControlsViewAndroid;
+export default from './PlaybackControlsViewAndroid';

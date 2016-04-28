@@ -1,2 +1,1 @@
-import PlaybackPane from './PlaybackPane';
-export default PlaybackPane;
+export default from './PlaybackPane';

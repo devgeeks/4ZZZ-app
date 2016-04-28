@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Tappable from 'react-tappable';
 import MDClose from 'react-icons/lib/md/close';
 
-import { animatingView } from 'containers/AnimatedViews';
+import animateView from 'containers/react-animated-views';
 
 import GuidePane from 'components/GuidePane';
 import Navbar from 'components/Navbar';
@@ -51,4 +51,4 @@ function mapStateToProps(state) {
   return { ...state };
 }
 
-export default animatingView(connect(mapStateToProps)(InfoView));
+export default animateView(connect(mapStateToProps)(InfoView));

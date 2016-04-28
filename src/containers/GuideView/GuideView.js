@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Tappable from 'react-tappable';
 import MdClose from 'react-icons/lib/md/close';
 
-import { animatingView } from 'containers/AnimatedViews';
+import animateView from 'containers/react-animated-views';
 
 import { isAndroid } from 'utils/Device';
 
@@ -79,4 +79,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default animatingView(connect(mapStateToProps)(GuideView));
+export default animateView(connect(mapStateToProps)(GuideView));
