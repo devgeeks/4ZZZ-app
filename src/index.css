@@ -13,6 +13,11 @@ body {
   margin: 0px;
   padding: 0px;
   width: 100%;
+  background: #37474F;
+}
+
+.iOS .page {
+  top: 20px;
 }
 
 .page {

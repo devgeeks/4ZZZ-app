@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import Tappable from 'react-tappable';
 import MdArrowBack from 'react-icons/lib/md/arrow-back';
 
-import { popFadeView, slideLeftView } from 'containers/AnimatedViews';
+import { animatingView } from 'containers/AnimatedViews';
+
+//import { isAndroid } from 'utils/Device';
 
 import GuidePane from 'components/GuidePane';
 import Navbar from 'components/Navbar';
-
-import { isAndroid } from 'utils/Device';
 
 const GuideDayView = React.createClass({
 
@@ -53,6 +53,4 @@ function mapStateToProps(state) {
   return { ...state };
 }
 
-export default isAndroid()
-  ? popFadeView(connect(mapStateToProps)(GuideDayView))
-  : slideLeftView(connect(mapStateToProps)(GuideDayView));
+export default animatingView(connect(mapStateToProps)(GuideDayView));

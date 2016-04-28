@@ -5,6 +5,8 @@ import MdClose from 'react-icons/lib/md/close';
 
 import { animatingView } from 'containers/AnimatedViews';
 
+import { isAndroid } from 'utils/Device';
+
 import GuidePane from 'components/GuidePane';
 import Navbar from 'components/Navbar';
 
@@ -31,7 +33,8 @@ const GuideView = React.createClass({
 
   handleNextButtonClick() {
     const { push } = this.props;
-    push('/guide/day', 'slideLeft');
+    const animation = isAndroid() ? 'popFade' : 'slideLeft';
+    push('/guide/day', animation);
   },
 
   render() {

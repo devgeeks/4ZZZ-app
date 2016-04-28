@@ -14,6 +14,7 @@ export default React.createClass({
   render() {
     const cx = classNames({
       'playback-pane': true,
+      'dark-primary-color': true,
     });
 
     return (

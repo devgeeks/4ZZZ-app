@@ -3,8 +3,8 @@ function popFadeIn(action, component, done) {
     requestAnimationFrame(() => {
       component.setState({
         style: {
-          transform: 'scale(0.95, 0.95)',
-          WebkitTransform: 'scale(0.95, 0.95)',
+          transform: 'scale3d(0.95, 0.95, 0.95)',
+          WebkitTransform: 'scale3d(0.95, 0.95, 0.95)',
           opacity: 0.01,
           zIndex: 2,
         },
@@ -12,10 +12,10 @@ function popFadeIn(action, component, done) {
       requestAnimationFrame(() => {
         component.setState({
           style: {
-            transform: 'scale(1, 1)',
-            WebkitTransform: 'scale(1, 1)',
-            transition: 'all .4s cubic-bezier(.1, 1, .5, 1)',
-            WebkitTransition: 'all .4s cubic-bezier(.1, 1, .5, 1)',
+            transform: 'scale3d(1, 1, 1)',
+            WebkitTransform: 'scale3d(1, 1, 1)',
+            transition: 'all .3s ease-in-out',
+            WebkitTransition: 'all .3s ease-in-out',
             transitionProperty: 'transform, opacity',
             WebkitTransitionProperty: '-webkit-transform, opacity',
             opacity: 1,
@@ -29,8 +29,8 @@ function popFadeIn(action, component, done) {
     requestAnimationFrame(() => {
       component.setState({
         style: {
-          transform: 'scale(0.95, 0.95)',
-          WebkitTransform: 'scale(0.95, 0.95)',
+          transform: 'scale3d(0.95, 0.95, 0.95)',
+          WebkitTransform: 'scale3d(0.95, 0.95, 0.95)',
           opacity: 0.01,
           zIndex: 1,
         },
@@ -38,10 +38,10 @@ function popFadeIn(action, component, done) {
       requestAnimationFrame(() => {
         component.setState({
           style: {
-            transform: 'scale(1, 1)',
-            WebkitTransform: 'scale(1, 1)',
-            transition: 'all .4s cubic-bezier(.1, 1, .5, 1)',
-            WebkitTransition: 'all .4s cubic-bezier(.1, 1, .5, 1)',
+            transform: 'scale3d(1, 1, 1)',
+            WebkitTransform: 'scale3d(1, 1, 1)',
+            transition: 'all .3s ease-in-out',
+            WebkitTransition: 'all .3s ease-in-out',
             transitionProperty: 'transform, opacity',
             WebkitTransitionProperty: '-webkit-transform, opacity',
             opacity: 1,
@@ -59,8 +59,8 @@ function popFadeOut(action, component, done) {
     requestAnimationFrame(() => {
       component.setState({
         style: {
-          transform: 'scale(1, 1)',
-          WebkitTransform: 'scale(1, 1)',
+          transform: 'scale3d(1, 1, 1)',
+          WebkitTransform: 'scale3d(1, 1, 1)',
           opacity: 1,
           zIndex: 1,
         },
@@ -68,11 +68,11 @@ function popFadeOut(action, component, done) {
       requestAnimationFrame(() => {
         component.setState({
           style: {
-            transform: 'scale(0.95, 0.95)',
-            WebkitTransform: 'scale(0.95, 0.95)',
-            transition: 'all .4s cubic-bezier(.1, 1, .5, 1)',
+            transform: 'scale3d(0.95, 0.95, 0.95)',
+            WebkitTransform: 'scale3d(0.95, 0.95, 0.95)',
+            transition: 'all .3s ease-in-out',
             transitionProperty: 'transform, opacity',
-            WebkitTransition: 'all .4s cubic-bezier(.1, 1, .5, 1)',
+            WebkitTransition: 'all .3s ease-in-out',
             WebkitTransitionProperty: '-webkit-transform, opacity',
             opacity: 0.7,
             zIndex: 1,
@@ -85,8 +85,8 @@ function popFadeOut(action, component, done) {
     requestAnimationFrame(() => {
       component.setState({
         style: {
-          transform: 'scale(1, 1)',
-          WebkitTransform: 'scale(1, 1)',
+          transform: 'scale3d(1, 1, 1)',
+          WebkitTransform: 'scale3d(1, 1, 1)',
           opacity: 1,
           zIndex: 2,
         },
@@ -94,11 +94,11 @@ function popFadeOut(action, component, done) {
       requestAnimationFrame(() => {
         component.setState({
           style: {
-            transform: 'scale(0.95, 0.95)',
-            WebkitTransform: 'scale(0.95, 0.95)',
-            transition: 'all .4s cubic-bezier(.1, 1, .5, 1)',
+            transform: 'scale3d(0.95, 0.95, 0.95)',
+            WebkitTransform: 'scale3d(0.95, 0.95, 0.95)',
+            transition: 'all .3s ease-in-out',
             transitionProperty: 'transform, opacity',
-            WebkitTransition: '-webkit-transform .4s cubic-bezier(.1, 1, .5, 1)',
+            WebkitTransition: '-webkit-transform .3s ease-in-out',
             WebkitTransitionProperty: '-webkit-transform, opacity',
             opacity: 0.01,
             zIndex: 2,

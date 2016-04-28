@@ -8,6 +8,8 @@ import { determineNowPlayingIfNeeded } from 'actions/nowPlayingActions';
 
 import { animatingView } from 'containers/AnimatedViews';
 
+//import { isAndroid } from 'utils/Device';
+
 import NowPlaying from 'components/NowPlaying';
 import PlaybackPane from 'components/PlaybackPane';
 import Navbar from 'components/Navbar';
@@ -67,7 +69,7 @@ const PlayView = React.createClass({
     return (
       <div className="page" style={ style }>
         <PlaybackPane>
-          <Navbar>
+          <Navbar gradient>
             <Tappable className="button left" component="a" classBase="tappable"
               onTap={ this.handleInfoButtonClick }
             >

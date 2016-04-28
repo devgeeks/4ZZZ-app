@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import TransitionGroup from 'react-addons-transition-group';
+import classNames from 'classnames';
 
 import ErrorDialog from 'components/ErrorDialog';
 import PlaybackControlsViewiOS from 'containers/PlaybackControlsViewiOS';
@@ -69,12 +70,17 @@ const App = React.createClass({
       direction: direction.toLowerCase(),
     };
 
+    const cx = classNames({
+      app: true,
+      iOS: !isAndroid(),
+    });
+
     const playBackControlsView = isAndroid()
       ? <PlaybackControlsViewAndroid errorHandler={ this.errorHandler } />
       : <PlaybackControlsViewiOS errorHandler={ this.errorHandler } />;
 
     return (
-      <div className="app">
+      <div className={ cx }>
         <ErrorDialog error={ this.state.error } />
         <TransitionGroup className="transitiongroup">
           { React.cloneElement(this.props.children || <div />, props) }
