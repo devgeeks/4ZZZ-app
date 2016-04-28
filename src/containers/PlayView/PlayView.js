@@ -6,6 +6,8 @@ import MdInfoOutline from 'react-icons/lib/md/info-outline';
 
 import { determineNowPlayingIfNeeded } from 'actions/nowPlayingActions';
 
+import { animatingView } from 'containers/AnimatedViews';
+
 import NowPlaying from 'components/NowPlaying';
 import PlaybackPane from 'components/PlaybackPane';
 import Navbar from 'components/Navbar';
@@ -19,8 +21,11 @@ const PlayView = React.createClass({
     dispatch: React.PropTypes.func.isRequired,
     errorHandler: React.PropTypes.func,
     nowPlaying: React.PropTypes.object,
+    push: React.PropTypes.func,
     store: React.PropTypes.object,
     guide: React.PropTypes.object,
+    setAction: React.PropTypes.func,
+    style: React.PropTypes.object,
   },
 
   contextTypes: {
@@ -47,20 +52,20 @@ const PlayView = React.createClass({
   },
 
   handleInfoButtonClick() {
-    const { router } = this.context;
-    router.push('/info');
+    const { push } = this.props;
+    push('/info', 'slideUp');
   },
 
   handleGuideButtonClick() {
-    const { router } = this.context;
-    router.push('/guide');
+    const { push } = this.props;
+    push('/guide', 'slideUp');
   },
 
   render() {
-    const { nowPlaying } = this.props;
+    const { nowPlaying, style } = this.props;
 
     return (
-      <div>
+      <div className="page" style={ style }>
         <PlaybackPane>
           <Navbar>
             <Tappable className="button left" component="a" classBase="tappable"
@@ -91,4 +96,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(PlayView);
+export default animatingView(connect(mapStateToProps)(PlayView));

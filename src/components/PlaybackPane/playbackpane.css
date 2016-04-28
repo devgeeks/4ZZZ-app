@@ -17,25 +17,3 @@
   margin-left: 50%;
   transform: translate(-50%, 0);
 }
-
-.routetransition-enter .playback-pane {
-  transform: scale3d(0.95, 0.95, 0);
-  opacity: 0.1;
-}
-
-.routetransition-enter.routetransition-enter-active .playback-pane {
-  transform: scale3d(1, 1, 1);
-  opacity: 1;
-  transition: all .3s ease-in-out;
-}
-
-.routetransition-leave .playback-pane {
-  transform: scale3d(1, 1, 1);
-  opacity: 1;
-  transition: all .3s ease-in-out;
-}
-
-.routetransition-leave.routetransition-leave-active .playback-pane {
-  transform: scale3d(0.95, 0.95, 0);
-  opacity: 0.1;
-}

@@ -6,6 +6,7 @@ import { hashHistory } from 'react-router';
 
 import App from 'containers/App';
 import PlayView from 'containers/PlayView';
+import InfoView from 'containers/InfoView';
 import GuideView from 'containers/GuideView';
 import GuideDayView from 'containers/GuideDayView';
 import GuideShowView from 'containers/GuideShowView';
@@ -40,7 +41,7 @@ ReactDOM.render((
     <Router history={ hashHistory }>
       <Route component={ App }>
         <Route path="listen" component={ PlayView } />
-        <Route path="info" component={ PlayView } />
+        <Route path="info" component={ InfoView } />
         <Route path="guide" component={ GuideView }>
           <Route path=":day" component={ GuideDayView } />
           <Route path=":day/:show" component={ GuideShowView } />

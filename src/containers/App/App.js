@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CSSTransitionGroup from 'react-addons-css-transition-group';
+import TransitionGroup from 'react-addons-transition-group';
 
 import ErrorDialog from 'components/ErrorDialog';
 import PlaybackControlsViewiOS from 'containers/PlaybackControlsViewiOS';
 import PlaybackControlsViewAndroid from 'containers/PlaybackControlsViewAndroid';
+
+import { isAndroid } from 'utils/Device';
 
 import { fetchGuideDataIfNeeded } from 'actions/guideActions';
 
@@ -57,34 +59,26 @@ const App = React.createClass({
     }, 3600);
   },
 
-  isAndroid() {
-    const ua = navigator.userAgent.toLowerCase();
-    return ua.indexOf('android') > -1;
-  },
-
   render() {
     const {
-      location: { pathname: key },
+      location: { pathname: key, action: direction },
     } = this.props;
     const props = {
       key,
       errorHandler: this.errorHandler,
+      direction: direction.toLowerCase(),
     };
 
-    const playBackControlsView = this.isAndroid()
+    const playBackControlsView = isAndroid()
       ? <PlaybackControlsViewAndroid errorHandler={ this.errorHandler } />
       : <PlaybackControlsViewiOS errorHandler={ this.errorHandler } />;
 
     return (
       <div className="app">
         <ErrorDialog error={ this.state.error } />
-        <CSSTransitionGroup
-          transitionEnterTimeout={ 300 }
-          transitionLeaveTimeout={ 300 }
-          transitionName="routetransition"
-        >
+        <TransitionGroup className="transitiongroup">
           { React.cloneElement(this.props.children || <div />, props) }
-        </CSSTransitionGroup>
+        </TransitionGroup>
         { playBackControlsView }
       </div>
     );

@@ -15,6 +15,15 @@ body {
   width: 100%;
 }
 
+.page {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+
 .status-bar					      { background: #263238; }
 .very-dark-primary-color	{ background: #37474F; }
 .dark-primary-color    		{ background: #455A64; }

@@ -33,6 +33,9 @@
   text-align: center;
   color: inherit;
   text-decoration: none;
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
 .navbar .button.right {
