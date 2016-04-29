@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Tappable from 'react-tappable';
 import MdClose from 'react-icons/lib/md/close';
 
-import animateView from 'containers/react-animated-views';
+import animateView from 'react-animated-views';
 
 import { isAndroid } from 'utils/Device';
 

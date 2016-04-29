@@ -6,7 +6,7 @@ import MdInfoOutline from 'react-icons/lib/md/info-outline';
 
 import { determineNowPlayingIfNeeded } from 'actions/nowPlayingActions';
 
-import animateView from 'containers/react-animated-views';
+import animateView from 'react-animated-views';
 
 //import { isAndroid } from 'utils/Device';
 

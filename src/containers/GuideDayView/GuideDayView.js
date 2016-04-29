@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Tappable from 'react-tappable';
 import MdArrowBack from 'react-icons/lib/md/arrow-back';
 
-import animateView from 'containers/react-animated-views';
+import animateView from 'react-animated-views';
 
 //import { isAndroid } from 'utils/Device';
 
