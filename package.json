@@ -15,6 +15,7 @@
     "offline-js": "^0.7.15",
     "react": "^0.14.8",
     "react-addons-transition-group": "^0.14.8",
+    "react-animated-views": "git+https://github.com/devgeeks/react-animated-views.git",
     "react-dom": "^0.14.8",
     "react-icons": "^1.0.2",
     "react-redux": "^4.4.0",
@@ -66,6 +67,6 @@
     "test": "NODE_ENV=production NODE_PATH=$NODE_PATH:$PWD/src mocha \"./src/**/*_test.js\" --compilers js:babel-core/register,css:css-null-compiler.js --recursive --require ./test/setup.js",
     "test:watch": "npm test -- --watch"
   },
-  "author": "Tommy-Carlos Williams <tommy@devgeeks.org>",
+  "author": "Tommy-Carlos Williams",
   "license": "MIT"
 }
