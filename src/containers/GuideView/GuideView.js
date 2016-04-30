@@ -18,12 +18,7 @@ const GuideView = React.createClass({
     children: React.PropTypes.object,
     push: React.PropTypes.func,
     pop: React.PropTypes.func,
-    setAction: React.PropTypes.func,
     style: React.PropTypes.object,
-  },
-
-  contextTypes: {
-    router: React.PropTypes.object.isRequired,
   },
 
   handleBackButtonClick() {
@@ -34,13 +29,13 @@ const GuideView = React.createClass({
   handleNextButtonClick() {
     const { push } = this.props;
     const animation = isAndroid() ? 'popFade' : 'slideLeft';
-    push('/guide/day', animation);
+    push('/guide/day/monday', animation);
   },
 
   render() {
     const { style } = this.props;
 
-    const days = (
+    return (
       <div className="page" style={ style }>
         <GuidePane>
           <Navbar>
@@ -64,10 +59,6 @@ const GuideView = React.createClass({
         </GuidePane>
       </div>
     );
-    if (this.props.children) {
-      return React.cloneElement(this.props.children || <div/>, this.props);
-    }
-    return days;
   },
 });
 

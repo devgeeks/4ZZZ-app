@@ -133,6 +133,10 @@ const PlaybackControlsViewiOS = React.createClass({
       dispatch(setAudioStatus('stopped'));
       if (this.audio) {
         this.audio.pause();
+        dispatch(setAudioDuration(hhmmss(0)));
+        setTimeout(() => {
+          this.audio = null;
+        }, 100);
       }
     }
   },

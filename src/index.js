@@ -42,10 +42,9 @@ ReactDOM.render((
       <Route component={ App }>
         <Route path="listen" component={ PlayView } />
         <Route path="info" component={ InfoView } />
-        <Route path="guide" component={ GuideView }>
-          <Route path=":day" component={ GuideDayView } />
-          <Route path=":day/:show" component={ GuideShowView } />
-        </Route>
+        <Route path="guide" component={ GuideView } />
+        <Route path="guide/day/:day" component={ GuideDayView } />
+        <Route path="guide/show/:show" component={ GuideShowView } />
         <Redirect from="/" to="/listen" />
       </Route>
     </Router>
