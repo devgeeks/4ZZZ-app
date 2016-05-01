@@ -29,7 +29,7 @@ const GuideView = React.createClass({
   handleNextButtonClick() {
     const { push } = this.props;
     const animation = isAndroid() ? 'popFade' : 'slideLeft';
-    push('/guide/day/monday', animation);
+    push('/guide/day/Monday', animation);
   },
 
   render() {
