@@ -15,6 +15,8 @@ const GuideShowView = React.createClass({
   displayName: 'GuideShowView',
 
   propTypes: {
+    guide: React.PropTypes.object,
+    params: React.PropTypes.object,
     style: React.PropTypes.object,
   },
 
@@ -29,7 +31,12 @@ const GuideShowView = React.createClass({
   },
 
   render() {
-    const { style } = this.props;
+    const {
+      style,
+      guide: { showsBySlug },
+      params: { show },
+    } = this.props;
+    const currentShow = showsBySlug[show];
 
     return (
       <div className="page" style={ style}>
@@ -42,7 +49,10 @@ const GuideShowView = React.createClass({
             </Tappable>
             <div className="title">Show</div>
           </Navbar>
-          <div className="content">show details...</div>
+          <div className="content">
+            <div>{ currentShow && currentShow.name }</div>
+            <div>{ currentShow && currentShow.broadcasters }</div>
+          </div>
         </GuidePane>
       </div>
     );

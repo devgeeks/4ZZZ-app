@@ -5,6 +5,7 @@ export default {
     const guide = {
       program: {},
       shows: [],
+      showsBySlug: {},
     };
     let slotLocalTime;
 
@@ -12,13 +13,16 @@ export default {
       if (guideData.hasOwnProperty(day)) {
         for (const slot in guideData[day]) {
           if (guideData[day].hasOwnProperty(slot)) {
-            guide.shows.push(guideData[day][slot]);
-            slotLocalTime = moment(guideData[day][slot].thisweek);
+            const data = guideData[day][slot];
+            guide.shows.push(data);
+            guide.showsBySlug[data.slug] = data;
+            slotLocalTime = moment(data.thisweek);
             if (!guide.program[slotLocalTime.format('dddd')]) {
               guide.program[slotLocalTime.format('dddd')] = {};
             }
+            guide.showsBySlug[data.slug].localTime = slotLocalTime.format();
             guide.program[slotLocalTime.format('dddd')][slotLocalTime.format()]
-              = guideData[day][slot];
+              = data;
           }
         }
       }

@@ -9,12 +9,15 @@ import { isAndroid } from 'utils/Device';
 
 import GuidePane from 'components/GuidePane';
 import Navbar from 'components/Navbar';
+import GuideList from 'components/GuideList';
 
 const GuideDayView = React.createClass({
 
   displayName: 'GuideDayView',
 
   propTypes: {
+    guide: React.PropTypes.object,
+    params: React.PropTypes.object,
     pop: React.PropTypes.func,
     push: React.PropTypes.func,
     style: React.PropTypes.object,
@@ -25,14 +28,38 @@ const GuideDayView = React.createClass({
     pop();
   },
 
-  handleNextButtonClick() {
+  handleShowListItemClick(slug) {
     const { push } = this.props;
     const animation = isAndroid() ? 'popFade' : 'slideLeft';
-    push('/guide/show/the-punk-show', animation);
+    push(`/guide/show/${slug}`, animation);
   },
 
   render() {
-    const { style } = this.props;
+    const {
+      style,
+      params: { day },
+      guide: { program },
+    } = this.props;
+    const showKeys = program[day]
+      ? Object.keys(program[day])
+      : [];
+    const shows = showKeys.map((show) => {
+      const { slug, name, broadcasters } = program[day][show];
+      const broadcastersDisplay = broadcasters
+        ? `with ${broadcasters}`
+        : '';
+      const tappable = (
+        <Tappable component="a" onTap={ () => this.handleShowListItemClick(slug) }>
+          <div>{ name }</div>
+          <div><small>{ broadcastersDisplay }</small></div>
+        </Tappable>
+      );
+      return (
+        <li key={ show }>
+          { tappable }
+        </li>
+      );
+    });
 
     return (
       <div className="page" style={ style }>
@@ -45,16 +72,9 @@ const GuideDayView = React.createClass({
             </Tappable>
             <div className="title">Day</div>
           </Navbar>
-          <div className="content">
-            list of shows...
-            <div>
-              <Tappable className="button" component="a" classBase="tappable"
-                onTap={ this.handleNextButtonClick }
-              >
-                Animate to next page
-              </Tappable>
-            </div>
-          </div>
+          <GuideList className="content">
+            { shows }
+          </GuideList>
         </GuidePane>
       </div>
     );

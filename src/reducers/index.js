@@ -26,6 +26,7 @@ function guideDataUrl(state = url, action) {
 function guide(state = {
   program: {},
   shows: [],
+  showsBySlug: {},
   isFetching: false,
   isParsing: false,
   fetched: null,
@@ -44,6 +45,7 @@ function guide(state = {
         ...state,
         program: action.guide.program,
         shows: action.guide.shows,
+        showsBySlug: action.guide.showsBySlug,
         fetched: moment().format(),
         isFetching: false,
         isParsing: false,

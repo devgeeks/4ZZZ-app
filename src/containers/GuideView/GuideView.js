@@ -9,6 +9,7 @@ import { isAndroid } from 'utils/Device';
 
 import GuidePane from 'components/GuidePane';
 import Navbar from 'components/Navbar';
+import GuideList from 'components/GuideList';
 
 const GuideView = React.createClass({
 
@@ -16,6 +17,7 @@ const GuideView = React.createClass({
 
   propTypes: {
     children: React.PropTypes.object,
+    guide: React.PropTypes.object,
     push: React.PropTypes.func,
     pop: React.PropTypes.func,
     style: React.PropTypes.object,
@@ -26,14 +28,28 @@ const GuideView = React.createClass({
     pop('slideUp'); // I don't want to have to do this...
   },
 
-  handleNextButtonClick() {
+  handleDayListItemClick(day) {
     const { push } = this.props;
     const animation = isAndroid() ? 'popFade' : 'slideLeft';
-    push('/guide/day/Monday', animation);
+    push(`/guide/day/${day}`, animation);
   },
 
   render() {
-    const { style } = this.props;
+    const { style, guide: { program } } = this.props;
+
+    const dayKeys = Object.keys(program);
+    const days = dayKeys.map(day => {
+      const tappable = (
+        <Tappable component="a" onTap={ () => this.handleDayListItemClick(day) }>
+          { day }
+        </Tappable>
+      );
+      return (
+        <li key={ day }>
+          { tappable }
+        </li>
+      );
+    });
 
     return (
       <div className="page" style={ style }>
@@ -46,16 +62,9 @@ const GuideView = React.createClass({
               <MdClose size="24" />
             </Tappable>
           </Navbar>
-          <div className="content">
-            list of days...
-            <div>
-              <Tappable className="button" component="a" classBase="tappable"
-                onTap={ this.handleNextButtonClick }
-              >
-                Animate to next page
-              </Tappable>
-            </div>
-          </div>
+          <GuideList className="content">
+            { days }
+          </GuideList>
         </GuidePane>
       </div>
     );
