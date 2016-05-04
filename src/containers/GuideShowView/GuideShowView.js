@@ -37,6 +37,7 @@ const GuideShowView = React.createClass({
       params: { show },
     } = this.props;
     const currentShow = showsBySlug[show];
+    const title = currentShow.name || show;
 
     return (
       <div className="page" style={ style}>
@@ -47,7 +48,7 @@ const GuideShowView = React.createClass({
             >
               <MdArrowBack size="24" />
             </Tappable>
-            <div className="title">Show</div>
+            <div className="title">{ title }</div>
           </Navbar>
           <div className="content">
             <div>{ currentShow && currentShow.name }</div>

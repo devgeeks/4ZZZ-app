@@ -70,7 +70,7 @@ const GuideDayView = React.createClass({
             >
               <MdArrowBack size="24" />
             </Tappable>
-            <div className="title">Day</div>
+            <div className="title">{ day }</div>
           </Navbar>
           <GuideList className="content">
             { shows }
