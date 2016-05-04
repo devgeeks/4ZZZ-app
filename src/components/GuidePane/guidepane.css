@@ -15,7 +15,7 @@
   bottom: 0;
   left: 0;
   overflow: auto;
-  -webkit-overflow-scrolling: auto;
+  -webkit-overflow-scrolling: touch;
   /* make sure to clear the FAB */
   padding: 16px 16px 112px 16px;
 }
