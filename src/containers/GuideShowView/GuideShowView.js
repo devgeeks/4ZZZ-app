@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Tappable from 'react-tappable';
 import MdArrowBack from 'react-icons/lib/md/arrow-back';
+import moment from 'moment-timezone';
 
 import animateView from 'react-animated-views';
 
@@ -37,7 +38,8 @@ const GuideShowView = React.createClass({
       params: { show },
     } = this.props;
     const currentShow = showsBySlug[show];
-    const title = currentShow.name || show;
+    const title = currentShow && currentShow.name || show;
+    const time = currentShow && moment(currentShow.localTime).format('dddd, h:mma') || '';
 
     return (
       <div className="page" style={ style}>
@@ -53,6 +55,8 @@ const GuideShowView = React.createClass({
           <div className="content">
             <div>{ currentShow && currentShow.name }</div>
             <div>{ currentShow && currentShow.broadcasters }</div>
+            <div>{ currentShow && currentShow.link }</div>
+            <div>{ time }</div>
           </div>
         </GuidePane>
       </div>

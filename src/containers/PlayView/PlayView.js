@@ -39,7 +39,7 @@ const PlayView = React.createClass({
     window.nowPlayingTimer = setInterval(() => {
       console.log('checking now playing');
       dispatch(determineNowPlayingIfNeeded());
-    }, 30000);
+    }, 10000); // In prod, maybe this should be like 1 second?
   },
 
   componentWillReceiveProps(nextProps) {

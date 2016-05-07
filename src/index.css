@@ -7,8 +7,11 @@ body {
   -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
   -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
   user-select: none;
-  font-family: 'HelveticaNeue-Light', 'HelveticaNeue', 'Roboto', Helvetica, Arial, sans-serif;
+  font-family: -apple-system-font, 'HelveticaNeue-Light', 'HelveticaNeue', 'Roboto', Helvetica, Arial, sans-serif;
   font-size: 100%;
+  line-height: 125%;
+  /*font-size: 17px;*/
+  /*line-height: 21px;*/
   height: 100%;
   margin: 0px;
   padding: 0px;

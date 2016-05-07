@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Tappable from 'react-tappable';
 import MdArrowBack from 'react-icons/lib/md/arrow-back';
+import moment from 'moment-timezone';
 
 import animateView from 'react-animated-views';
 
@@ -44,14 +45,20 @@ const GuideDayView = React.createClass({
       ? Object.keys(program[day])
       : [];
     const shows = showKeys.map((show) => {
-      const { slug, name, broadcasters } = program[day][show];
+      const { slug, name, broadcasters, localTime } = program[day][show];
+      const time = moment(localTime).format('h:mma');
       const broadcastersDisplay = broadcasters
         ? `with ${broadcasters}`
         : '';
       const tappable = (
         <Tappable component="a" onTap={ () => this.handleShowListItemClick(slug) }>
-          <div>{ name }</div>
-          <div><small>{ broadcastersDisplay }</small></div>
+          <div className="main">
+            <div>{ name }</div>
+            <div><small className="secondary-text-color">{ broadcastersDisplay }</small></div>
+          </div>
+          <div className="right">
+          <small className="secondary-text-color">{ time }</small>
+          </div>
         </Tappable>
       );
       return (

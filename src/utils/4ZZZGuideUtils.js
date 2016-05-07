@@ -31,6 +31,7 @@ export default {
     // Only if using something async like localForage...
     return Promise.resolve(guide);
   },
+
   determineNowPlaying(shows) {
     let nowPlaying = {};
     let error;

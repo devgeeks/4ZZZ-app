@@ -41,7 +41,7 @@ const GuideView = React.createClass({
     const days = dayKeys.map(day => {
       const tappable = (
         <Tappable component="a" onTap={ () => this.handleDayListItemClick(day) }>
-          { day }
+          <span style={ { fontSize: '120%', margin: '8px' } }>{ day }</span>
         </Tappable>
       );
       return (
