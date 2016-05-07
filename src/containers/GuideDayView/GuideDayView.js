@@ -53,8 +53,10 @@ const GuideDayView = React.createClass({
       const tappable = (
         <Tappable component="a" onTap={ () => this.handleShowListItemClick(slug) }>
           <div className="main">
-            <div>{ name }</div>
-            <div><small className="secondary-text-color">{ broadcastersDisplay }</small></div>
+            <div className="ellipsis">{ name }</div>
+            <div className="ellipsis">
+              <small className="secondary-text-color">{ broadcastersDisplay }</small>
+            </div>
           </div>
           <div className="right">
           <small className="secondary-text-color">{ time }</small>

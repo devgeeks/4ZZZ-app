@@ -48,13 +48,21 @@
   display: flex;
   flex-direction: column;
   flex: 9;
+  overflow: hidden;
 }
 
 .guide-list li a .right {
+  padding-left: 8px;
   align-self: center;
   flex: 1;
 }
 
 .guide-list li a.Tappable-active {
   background: #CFD8DC;
+}
+
+.guide-list .ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
