@@ -52,7 +52,7 @@
 }
 
 .guide-list li a .right {
-  padding-left: 8px;
+  padding: 0 8px;
   align-self: center;
   flex: 1;
 }
