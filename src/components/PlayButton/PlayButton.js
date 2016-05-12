@@ -5,32 +5,28 @@ import MdPlayArrow from 'react-icons/lib/md/play-arrow';
 
 import './playbutton.css';
 
-export default React.createClass({
+const PlayButton = (props) => {
+  const { handleClick } = props;
+  const cx = classNames({
+    'play-button': true,
+  });
 
-  displayName: 'PlayButton',
+  return (
+    <div>
+      <Tappable
+        className={ cx } component="a" classBase="tappable"
+        onTap={ () => handleClick('play') }
+      >
+        <MdPlayArrow size="40" />
+      </Tappable>
+    </div>
+  );
+};
 
-  propTypes: {
-    handleClick: React.PropTypes.func.isRequired,
-  },
+PlayButton.displayName = 'PlayButton';
 
-  clickHandler() {
-    const { handleClick } = this.props;
-    handleClick('play');
-  },
+PlayButton.propTypes = {
+  handleClick: React.PropTypes.func.isRequired,
+};
 
-  render() {
-    const cx = classNames({
-      'play-button': true,
-    });
-
-    return (
-        <div>
-          <Tappable className={ cx } component="a" classBase="tappable"
-            onTap={ this.clickHandler }
-          >
-            <MdPlayArrow size="40" />
-          </Tappable>
-        </div>
-    );
-  },
-});
+export default PlayButton;

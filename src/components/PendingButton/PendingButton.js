@@ -5,34 +5,30 @@ import Tappable from 'react-tappable';
 
 import './pendingbutton.css';
 
-export default React.createClass({
+const PendingButton = (props) => {
+  const { children, handleClick } = props;
+  const cx = classNames({
+    'pending-button': true,
+  });
 
-  displayName: 'PendingButton',
+  return (
+    <div>
+      <Tappable
+        className={ cx } component="a" classBase="tappable"
+        onTap={ () => handleClick('stop') }
+      >
+        <FaSpinner size="32" />
+      </Tappable>
+      { children }
+    </div>
+  );
+};
 
-  propTypes: {
-    children: React.PropTypes.any,
-    handleClick: React.PropTypes.func.isRequired,
-  },
+PendingButton.displayName = 'PendingButton';
 
-  clickHandler() {
-    const { handleClick } = this.props;
-    handleClick('stop');
-  },
+PendingButton.propTypes = {
+  children: React.PropTypes.any,
+  handleClick: React.PropTypes.func.isRequired,
+};
 
-  render() {
-    const cx = classNames({
-      'pending-button': true,
-    });
-
-    return (
-      <div>
-        <Tappable className={ cx } component="a" classBase="tappable"
-          onTap={ this.clickHandler }
-        >
-          <FaSpinner size="32" />
-        </Tappable>
-        { this.props.children }
-      </div>
-    );
-  },
-});
+export default PendingButton;

@@ -3,28 +3,27 @@ import classNames from 'classnames';
 
 import './errordialog.css';
 
-export default React.createClass({
+const ErrorDialog = (props) => {
+  const { error } = props;
+  const { displayed, message } = error;
 
-  displayName: 'ErrorDialog',
+  const cx = classNames({
+    displayed,
+    'error-dialog': true,
+  });
 
-  propTypes: {
-    error: React.PropTypes.object,
-  },
+  return (
+    <div className={ cx }>
+      <div className="title">Error</div>
+      <div className="message">{ message }</div>
+    </div>
+  );
+};
 
-  render() {
-    const { error } = this.props;
-    const { displayed, message } = error;
+ErrorDialog.displayName = 'ErrorDialog';
 
-    const cx = classNames({
-      displayed,
-      'error-dialog': true,
-    });
+ErrorDialog.propTypes = {
+  error: React.PropTypes.object,
+};
 
-    return (
-      <div className={ cx }>
-        <div className="title">Error</div>
-        <div className="message">{ message }</div>
-      </div>
-    );
-  },
-});
+export default ErrorDialog;

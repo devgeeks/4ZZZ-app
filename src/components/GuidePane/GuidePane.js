@@ -3,24 +3,23 @@ import classNames from 'classnames';
 
 import './guidepane.css';
 
-export default React.createClass({
+const GuidePane = (props) => {
+  const cx = classNames({
+    'guide-pane': true,
+    'primary-text-color': true,
+  });
 
-  displayName: 'GuidePane',
+  return (
+    <div className={ cx }>
+      { props.children }
+    </div>
+  );
+};
 
-  propTypes: {
-    children: React.PropTypes.array,
-  },
+GuidePane.displayName = 'GuidePane';
 
-  render() {
-    const cx = classNames({
-      'guide-pane': true,
-      'primary-text-color': true,
-    });
+GuidePane.propTypes = {
+  children: React.PropTypes.array,
+};
 
-    return (
-      <div className={ cx }>
-        { this.props.children }
-      </div>
-    );
-  },
-});
+export default GuidePane;

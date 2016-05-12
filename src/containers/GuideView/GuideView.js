@@ -56,7 +56,8 @@ const GuideView = React.createClass({
         <GuidePane>
           <Navbar>
             <div className="title">Program</div>
-            <Tappable className="button right" component="a" classBase="tappable"
+            <Tappable
+              className="button right" component="a" classBase="tappable"
               onTap={ this.handleBackButtonClick }
             >
               <MdClose size="24" />

@@ -3,25 +3,25 @@ import classNames from 'classnames';
 
 import './playbackpane.css';
 
-export default React.createClass({
+const PlaybackPane = (props) => {
+  const { children } = props;
+  const cx = classNames({
+    'playback-pane': true,
+    'dark-primary-color': true,
+  });
 
-  displayName: 'PlaybackPane',
+  return (
+    <div className={ cx }>
+      <div className="bg" />
+      { children }
+    </div>
+  );
+};
 
-  propTypes: {
-    children: React.PropTypes.array,
-  },
+PlaybackPane.displayName = 'PlaybackPane';
 
-  render() {
-    const cx = classNames({
-      'playback-pane': true,
-      'dark-primary-color': true,
-    });
+PlaybackPane.propTypes = {
+  children: React.PropTypes.array,
+};
 
-    return (
-      <div className={ cx }>
-        <div className="bg" />
-        { this.props.children }
-      </div>
-    );
-  },
-});
+export default PlaybackPane;

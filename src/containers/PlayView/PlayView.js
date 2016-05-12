@@ -70,13 +70,15 @@ const PlayView = React.createClass({
       <div className="page" style={ style }>
         <PlaybackPane>
           <Navbar gradient>
-            <Tappable className="button left" component="a" classBase="tappable"
+            <Tappable
+              className="button left" component="a" classBase="tappable"
               onTap={ this.handleInfoButtonClick }
             >
               <MdInfoOutline size="24" />
             </Tappable>
             <div className="title">Listen</div>
-            <Tappable className="button right" component="a" classBase="tappable"
+            <Tappable
+              className="button right" component="a" classBase="tappable"
               onTap={ this.handleGuideButtonClick }
             >
               <MdEventNote size="24" />

@@ -34,7 +34,8 @@ const InfoView = React.createClass({
         <GuidePane>
           <Navbar>
             <div className="title">Info</div>
-            <Tappable className="button right" component="a" classBase="tappable"
+            <Tappable
+              className="button right" component="a" classBase="tappable"
               onTap={ this.handleBackButtonClick }
             >
               <MDClose size="24" />

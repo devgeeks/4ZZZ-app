@@ -3,25 +3,23 @@ import classNames from 'classnames';
 
 import './guidelist.css';
 
-export default React.createClass({
+const GuideList = (props) => {
+  const cx = classNames({
+    'guide-list': true,
+    'divider-color': true,
+  });
 
-  displayName: 'GuideList',
+  return (
+    <ul className={ cx }>
+      { props.children }
+    </ul>
+  );
+};
 
-  propTypes: {
-    children: React.PropTypes.any,
-    className: React.PropTypes.string,
-  },
+GuideList.displayName = 'GuideList';
 
-  render() {
-    const cx = classNames({
-      'guide-list': true,
-      'divider-color': true,
-    });
+GuideList.propTypes = {
+  children: React.PropTypes.any,
+};
 
-    return (
-      <ul className={ cx }>
-        { this.props.children }
-      </ul>
-    );
-  },
-});
+export default GuideList;

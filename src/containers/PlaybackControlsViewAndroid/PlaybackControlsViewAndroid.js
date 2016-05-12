@@ -68,7 +68,7 @@ const PlaybackControlsViewAndroid = React.createClass({
   mediaTimer: null,
 
   mediaSuccess() {
-    console.log('MEDIA_SUCCESS', arguments);
+    console.log('MEDIA_SUCCESS');
   },
 
   mediaError(err) {

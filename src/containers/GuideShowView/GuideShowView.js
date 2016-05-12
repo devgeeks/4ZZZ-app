@@ -42,10 +42,11 @@ const GuideShowView = React.createClass({
     const time = currentShow && moment(currentShow.localTime).format('dddd, h:mma') || '';
 
     return (
-      <div className="page" style={ style}>
+      <div className="page" style={ style }>
         <GuidePane>
           <Navbar>
-            <Tappable className="button left" component="a" classBase="tappable"
+            <Tappable
+              className="button left" component="a" classBase="tappable"
               onTap={ this.handleBackButtonClick }
             >
               <MdArrowBack size="24" />

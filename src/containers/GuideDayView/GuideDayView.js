@@ -59,7 +59,7 @@ const GuideDayView = React.createClass({
             </div>
           </div>
           <div className="right">
-          <small className="secondary-text-color">{ time }</small>
+            <small className="secondary-text-color">{ time }</small>
           </div>
         </Tappable>
       );
@@ -74,7 +74,8 @@ const GuideDayView = React.createClass({
       <div className="page" style={ style }>
         <GuidePane>
           <Navbar>
-            <Tappable className="button left" component="a" classBase="tappable"
+            <Tappable
+              className="button left" component="a" classBase="tappable"
               onTap={ this.handleBackButtonClick }
             >
               <MdArrowBack size="24" />

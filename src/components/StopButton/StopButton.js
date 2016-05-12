@@ -5,34 +5,30 @@ import MdStop from 'react-icons/lib/md/stop';
 
 import './stopbutton.css';
 
-export default React.createClass({
+const StopButton = (props) => {
+  const { children, handleClick } = props;
+  const cx = classNames({
+    'stop-button': true,
+  });
 
-  displayName: 'StopButton',
+  return (
+    <div>
+      <Tappable
+        className={ cx } component="a" classBase="tappable"
+        onTap={ () => handleClick('stop') }
+      >
+        <MdStop size="40" />
+      </Tappable>
+      { children }
+    </div>
+  );
+};
 
-  propTypes: {
-    children: React.PropTypes.any,
-    handleClick: React.PropTypes.func.isRequired,
-  },
+StopButton.displayName = 'StopButton';
 
-  clickHandler() {
-    const { handleClick } = this.props;
-    handleClick('stop');
-  },
+StopButton.propTypes = {
+  children: React.PropTypes.any,
+  handleClick: React.PropTypes.func.isRequired,
+};
 
-  render() {
-    const cx = classNames({
-      'stop-button': true,
-    });
-
-    return (
-      <div>
-        <Tappable className={ cx } component="a" classBase="tappable"
-          onTap={ this.clickHandler }
-        >
-          <MdStop size="40" />
-        </Tappable>
-        { this.props.children }
-      </div>
-    );
-  },
-});
+export default StopButton;

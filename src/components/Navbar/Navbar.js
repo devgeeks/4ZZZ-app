@@ -3,27 +3,26 @@ import classNames from 'classnames';
 
 import './navbar.css';
 
-export default React.createClass({
+const Navbar = (props) => {
+  const cx = classNames({
+    navbar: true,
+    'very-dark-primary-color': true,
+    gradient: props.gradient,
+  });
 
-  displayName: 'Navbar',
+  return (
+    <div className={ cx } style={ props.style }>
+      { props.children }
+    </div>
+  );
+};
 
-  propTypes: {
-    children: React.PropTypes.array,
-    gradient: React.PropTypes.bool,
-    style: React.PropTypes.object,
-  },
+Navbar.displayName = 'Navbar';
 
-  render() {
-    const cx = classNames({
-      navbar: true,
-      'very-dark-primary-color': true,
-      gradient: this.props.gradient,
-    });
+Navbar.propTypes = {
+  children: React.PropTypes.array,
+  gradient: React.PropTypes.bool,
+  style: React.PropTypes.object,
+};
 
-    return (
-      <div className={ cx } style={ this.props.style }>
-        { this.props.children }
-      </div>
-    );
-  },
-});
+export default Navbar;
