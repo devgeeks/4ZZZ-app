@@ -23,7 +23,7 @@ const GuideView = React.createClass({
     style: React.PropTypes.object,
   },
 
-  handleBackButtonClick() {
+  handleCloseButtonClick() {
     const { pop } = this.props;
     pop('slideUp'); // I don't want to have to do this...
   },
@@ -58,7 +58,7 @@ const GuideView = React.createClass({
             <div className="title">Program</div>
             <Tappable
               className="button right" component="a" classBase="tappable"
-              onTap={ this.handleBackButtonClick }
+              onTap={ this.handleCloseButtonClick }
             >
               <MdClose size="24" />
             </Tappable>

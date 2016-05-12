@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Redirect, Router, Route } from 'react-router';
-import { hashHistory } from 'react-router';
+import { Redirect, Router, Route, hashHistory } from 'react-router';
 
 import App from 'containers/App';
 import PlayView from 'containers/PlayView';
@@ -37,7 +36,7 @@ import './index.css';
 const store = configureStore();
 
 ReactDOM.render((
-  <Provider store={store}>
+  <Provider store={ store }>
     <Router history={ hashHistory }>
       <Route component={ App }>
         <Route path="listen" component={ PlayView } />
