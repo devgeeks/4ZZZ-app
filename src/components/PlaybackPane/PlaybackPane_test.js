@@ -22,7 +22,8 @@ describe('PlaybackPane component', () => {
   it('should render correctly', () => {
     const { output } = setup();
     expect(output.type).toBe('div');
-    expect(output.props.className).toBe('playback-pane');
+    expect(output.props.className).toContain('playback-pane');
+    expect(output.props.className).toContain('dark-primary-color');
   });
 
   it('should render its children correctly', () => {

@@ -48,6 +48,7 @@ describe('guide actions', () => {
             dayofweek: 'Tuesday',
             duration: 1,
             link: 'http://www.4zzzfm.org.au/program/nothin-but-the-blues',
+            localTime: '2016-03-01T23:00:00+11:00',
             name: 'Nothin but the Blues',
             slug: 'nothin-but-the-blues',
             thisweek: '2016-03-01T12:00:00.000Z',
@@ -61,12 +62,26 @@ describe('guide actions', () => {
           dayofweek: 'Tuesday',
           duration: 1,
           link: 'http://www.4zzzfm.org.au/program/nothin-but-the-blues',
+          localTime: '2016-03-01T23:00:00+11:00',
           name: 'Nothin but the Blues',
           slug: 'nothin-but-the-blues',
           thisweek: '2016-03-01T12:00:00.000Z',
           timeofday: '22:00',
         },
       ],
+      showsBySlug: {
+        'nothin-but-the-blues': {
+          broadcasters: 'Mark',
+          dayofweek: 'Tuesday',
+          duration: 1,
+          link: 'http://www.4zzzfm.org.au/program/nothin-but-the-blues',
+          localTime: '2016-03-01T23:00:00+11:00',
+          name: 'Nothin but the Blues',
+          slug: 'nothin-but-the-blues',
+          thisweek: '2016-03-01T12:00:00.000Z',
+          timeofday: '22:00',
+        },
+      },
     };
 
     // Mock the fetch call
