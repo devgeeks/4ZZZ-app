@@ -42,4 +42,5 @@
     <plugin name="cordova-plugin-remotecommand" spec="~1.0.0" />
     <plugin name="cordova-plugin-nowplaying" spec="~1.0.0" />
     <plugin name="cordova-plugin-media" spec="~2.2.0" />
+    <plugin name="cordova-plugin-inappbrowser" spec="~1.4.0" />
 </widget>

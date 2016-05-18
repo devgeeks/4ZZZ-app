@@ -31,6 +31,21 @@ const GuideShowView = React.createClass({
     router.goBack();
   },
 
+  openExternalLink(link) {
+    const { cordova } = window || { cordova: null };
+    const { InAppBrowser: iap } = cordova || { InAppBrowser: null };
+    if (iap) {
+      iap.open(
+        link,
+        '_blank',
+        'enableViewportScale=yes'
+      );
+    } else {
+      window.location = link;
+      console.warn('InAppBrowser not supported');
+    }
+  },
+
   render() {
     const {
       style,
@@ -38,8 +53,10 @@ const GuideShowView = React.createClass({
       params: { show },
     } = this.props;
     const currentShow = showsBySlug[show];
+    console.log(currentShow);
     const title = currentShow && currentShow.name || show;
-    const time = currentShow && moment(currentShow.localTime).format('dddd, h:mma') || '';
+    const time = currentShow &&
+      moment(currentShow.localTime).format('dddd\\s \\at h:mma') || '';
 
     return (
       <div className="page" style={ style }>
@@ -56,7 +73,12 @@ const GuideShowView = React.createClass({
           <div className="content">
             <div>{ currentShow && currentShow.name }</div>
             <div>{ currentShow && currentShow.broadcasters }</div>
-            <div>{ currentShow && currentShow.link }</div>
+            <Tappable
+              className="external-link" component="a" classBase="tappable"
+              onTap={ () => this.openExternalLink(currentShow.link) }
+            >
+              { currentShow && currentShow.link }
+            </Tappable>
             <div>{ time }</div>
           </div>
         </GuidePane>
