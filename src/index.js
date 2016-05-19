@@ -8,7 +8,7 @@ import PlayView from 'containers/PlayView';
 import InfoView from 'containers/InfoView';
 import GuideView from 'containers/GuideView';
 import GuideDayView from 'containers/GuideDayView';
-import GuideShowView from 'containers/GuideShowView';
+//import GuideShowView from 'containers/GuideShowView';
 import configureStore from 'stores/configureStore';
 
 const offlineCheckUrl = 'http://4zzzfm.org.au:41021';
@@ -43,7 +43,7 @@ ReactDOM.render((
         <Route path="info" component={ InfoView } />
         <Route path="guide" component={ GuideView } />
         <Route path="guide/day/:day" component={ GuideDayView } />
-        <Route path="guide/show/:show" component={ GuideShowView } />
+        { /* <Route path="guide/show/:show" component={ GuideShowView } /> */ }
         <Redirect from="/" to="/listen" />
       </Route>
     </Router>

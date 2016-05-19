@@ -23,6 +23,16 @@ const GuideView = React.createClass({
     style: React.PropTypes.object,
   },
 
+  componentDidMount() {
+    // bind back button
+    document.addEventListener('backbutton', this.handleCloseButtonClick, false);
+  },
+
+  componentWillUnmount() {
+    // unbind back button
+    document.removeEventListener('backbutton', this.handleCloseButtonClick);
+  },
+
   handleCloseButtonClick() {
     const { pop } = this.props;
     pop('slideUp'); // I don't want to have to do this...
