@@ -88,7 +88,11 @@ const GuideShowView = React.createClass({
 });
 
 function mapStateToProps(state) {
-  return { ...state };
+  const { guide, nowPlaying } = state;
+  return {
+    guide,
+    nowPlaying,
+  };
 }
 
 export default animateView(connect(mapStateToProps)(GuideShowView));

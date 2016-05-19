@@ -92,7 +92,11 @@ const GuideDayView = React.createClass({
 });
 
 function mapStateToProps(state) {
-  return { ...state };
+  const { guide, nowPlaying } = state;
+  return {
+    guide,
+    nowPlaying,
+  };
 }
 
 export default animateView(connect(mapStateToProps)(GuideDayView));
