@@ -25,11 +25,13 @@ const GuideView = React.createClass({
 
   componentDidMount() {
     // bind back button
+    // This needs special attention or the animation won't be right :(
     document.addEventListener('backbutton', this.handleCloseButtonClick, false);
   },
 
   componentWillUnmount() {
     // unbind back button
+    // Don't want to leave this bound
     document.removeEventListener('backbutton', this.handleCloseButtonClick);
   },
 

@@ -1,4 +1,4 @@
-# 4ZZZfm Mobile App
+# 4ZZZ Mobile App
 
 It's time to finally update this poor ancient app.
 
