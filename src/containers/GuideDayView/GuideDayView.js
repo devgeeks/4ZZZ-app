@@ -29,10 +29,24 @@ const GuideDayView = React.createClass({
     pop();
   },
 
-  handleShowListItemClick(slug) {
+  handleShowListItemClick(link) {
+    const { cordova } = window || { cordova: null };
+    const { InAppBrowser: iap } = cordova || { InAppBrowser: null };
+    if (iap) {
+      iap.open(
+        link,
+        '_blank',
+        'enableViewportScale=yes'
+      );
+    } else {
+      window.location = link;
+      console.warn('InAppBrowser not supported');
+    }
+    /*
     const { push } = this.props;
     const animation = isAndroid() ? 'popFade' : 'slideLeft';
     push(`/guide/show/${slug}`, animation);
+    */
   },
 
   render() {
@@ -45,13 +59,13 @@ const GuideDayView = React.createClass({
       ? Object.keys(program[day])
       : [];
     const shows = showKeys.map((show) => {
-      const { slug, name, broadcasters, localTime } = program[day][show];
+      const { link, slug, name, broadcasters, localTime } = program[day][show];
       const time = moment(localTime).format('h:mma');
       const broadcastersDisplay = broadcasters
         ? `with ${broadcasters}`
         : '';
       const tappable = (
-        <Tappable component="a" onTap={ () => this.handleShowListItemClick(slug) }>
+        <Tappable component="a" onTap={ () => this.handleShowListItemClick(link) }>
           <div className="main">
             <div className="ellipsis">{ name }</div>
             <div className="ellipsis">
