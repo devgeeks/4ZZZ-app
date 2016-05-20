@@ -82,7 +82,7 @@ const InfoView = React.createClass({
             <p>Big thanks to Michelle Brown, long-time friend and station
             manager. Thanks for letting me do this back when I had never released
             an app before. It started me down a road I couldn&#39;t have
-            imagined at the time</p>
+            imagined at the time.</p>
           </div>
         </GuidePane>
       </div>
