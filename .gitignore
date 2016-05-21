@@ -42,3 +42,6 @@ www/bundle.js.map
 
 .DS_Store
 **/*/.DS_Store
+
+# Keystore
+4zzz-release-key.keystore

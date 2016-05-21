@@ -1,0 +1,9 @@
+{
+  "android": {
+    "release": {
+      "keystore": "./4zzz-release-key.keystore",
+      "alias": "4zzz",
+      "keystoreType": ""
+    }
+  }
+}

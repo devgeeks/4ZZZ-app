@@ -22,6 +22,7 @@ const PlaybackControlsViewAndroid = React.createClass({
   componentDidMount() {
     document.addEventListener('deviceready', () => {
       console.log('device ready!');
+      window.StatusBar && window.StatusBar.backgroundColorByHexString('#263238');
 
       if (window.MusicControls) {
         window.MusicControls.subscribe((action) => {
