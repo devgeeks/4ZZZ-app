@@ -55,11 +55,11 @@ const PlaybackControlsViewiOS = React.createClass({
   audio: null,
 
   createOrPlayAudio() {
+    const { dispatch, errorHandler } = this.props;
     if (this.audio) {
       this.audio.play();
       return;
     }
-    const { dispatch, errorHandler } = this.props;
     const audioURL = 'http://stream.4zzzfm.org.au:789/;';
     this.audio = window.audio = new Audio(audioURL);
     this.audio.play();
@@ -134,9 +134,7 @@ const PlaybackControlsViewiOS = React.createClass({
       if (this.audio) {
         this.audio.pause();
         dispatch(setAudioDuration(hhmmss(0)));
-        setTimeout(() => {
-          this.audio = null;
-        }, 100);
+        this.audio.load();
       }
     }
   },
