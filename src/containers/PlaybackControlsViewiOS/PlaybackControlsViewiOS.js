@@ -45,7 +45,8 @@ const PlaybackControlsViewiOS = React.createClass({
   setNowPlayingControls() {
     const { nowPlaying: { show: { name, broadcasters } } } = this.props;
     window.NowPlaying && window.NowPlaying.set({
-      artwork: 'http://cart.4zzzfm.org.au/includes/templates/classic/images/4ZZZ_CIRC.png',
+      //artwork: 'http://cart.4zzzfm.org.au/includes/templates/classic/images/4ZZZ_CIRC.png',
+      artwork: 'http://ondemand.4zzzfm.org.au/img/4ZZZ_C_Blue_Rev.png',
       albumTitle: broadcasters,
       artist: name,
       title: '4ZZZ',
