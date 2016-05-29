@@ -63,9 +63,9 @@
     "icons": "cordova-icon && cordova-splash",
     "android": "cordova run android",
     "ios": "cordova run ios",
-    "prepare": "node config && NODE_ENV=production webpack -d && cordova prepare",
-    "build": "node config && webpack -d",
-    "prod": "NODE_ENV=production node config && NODE_ENV=production webpack -p",
+    "prepare": "node config && NODE_ENV=production webpack --progress -d && cordova prepare",
+    "build": "node config && webpack --progress -d",
+    "prod": "NODE_ENV=production node config && NODE_ENV=production webpack --progress -p",
     "start": "node config && HOST=0.0.0.0 webpack-dev-server",
     "test": "NODE_ENV=production NODE_PATH=$NODE_PATH:$PWD/src mocha \"./src/**/*_test.js\" --compilers js:babel-core/register,css:css-null-compiler.js --recursive --require ./test/setup.js",
     "test:watch": "npm test -- --watch"
