@@ -12,7 +12,7 @@
     <preference name="target-device" value="universal" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="detect-data-types" value="true" />
-    <preference name="android-minSdkVersion" value="14" />
+    <preference name="android-minSdkVersion" value="17" />
     <preference name="android-installLocation" value="auto" />
     <preference name="BackgroundColor" value="0xff455a64" />
     <preference name="FadeSplashScreenDuration" value="300" />
@@ -37,10 +37,10 @@
     <plugin name="nl.x-services.plugins.backgroundaudio" spec="https://github.com/EddyVerbruggen/cordova-plugin-backgroundaudio" />
     <hook src="scripts/icons-hook.sh" type="after_platform_add" />
     <plugin name="cordova-plugin-splashscreen" spec="~3.1.0" />
-    <plugin name="cordova-plugin-music-controls" spec="https://github.com/homerours/cordova-music-controls-plugin" />
     <plugin name="cordova-plugin-remotecommand" spec="~1.0.0" />
     <plugin name="cordova-plugin-nowplaying" spec="~1.0.0" />
     <plugin name="cordova-plugin-inappbrowser" spec="~1.4.0" />
     <plugin name="cordova-plugin-statusbar" spec="~1.0.1" />
     <plugin name="cordova-plugin-media" spec="https://git-wip-us.apache.org/repos/asf/cordova-plugin-media.git" />
+    <plugin name="cordova-plugin-music-controls" spec="https://github.com/homerours/cordova-music-controls-plugin#master" />
 </widget>
