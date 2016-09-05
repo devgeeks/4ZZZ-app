@@ -41,6 +41,6 @@
     <plugin name="cordova-plugin-nowplaying" spec="~1.0.0" />
     <plugin name="cordova-plugin-inappbrowser" spec="~1.4.0" />
     <plugin name="cordova-plugin-statusbar" spec="~1.0.1" />
-    <plugin name="cordova-plugin-media" spec="https://git-wip-us.apache.org/repos/asf/cordova-plugin-media.git" />
     <plugin name="cordova-plugin-music-controls" spec="https://github.com/homerours/cordova-music-controls-plugin#master" />
+    <plugin name="cordova-plugin-media" spec="https://github.com/apache/cordova-plugin-media" />
 </widget>
