@@ -12,7 +12,7 @@ import {
   AUDIO_OBJECT_CREATED, AUDIO_OBJECT_DESTROYED,
 } from 'actions/audioActions';
 
-const url = 'http://4zzzfm.org.au:41021';
+const url = 'https://data.4zzz.org.au/grid/';
 
 function guideDataUrl(state = url, action) {
   switch (action.type) {

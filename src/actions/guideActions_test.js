@@ -14,7 +14,7 @@ describe('guide actions', () => {
   });
 
   it('should create an action to set the guide data url', () => {
-    const url = 'http://4zzzfm.org.au:41021';
+    const url = 'https://data.4zzz.org.au/grid/';
     const expectedAction = {
       type: actions.SET_GUIDE_DATA_URL,
       url,
