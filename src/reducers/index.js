@@ -107,7 +107,7 @@ function media(state = {
         status,
       };
     case SET_AUDIO_DURATION:
-      console.log(action.type);
+      //console.log(action.type);
       return {
         ...state,
         duration: action.duration,

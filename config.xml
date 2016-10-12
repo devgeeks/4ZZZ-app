@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.devgeeks.fourtriplezed" ios-CFBundleIdentifier="org.devgeeks.4zzz" version="4.1.0" android-versionCode="400100" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget android-versionCode="400100" id="org.devgeeks.fourtriplezed" ios-CFBundleIdentifier="org.devgeeks.4zzz" version="4.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>4ZZZ</name>
     <description>
-      4ZZZ Radio App
-	  </description>
+        4ZZZ Radio App
+    </description>
     <author email="tommy@devgeeks.org" href="http://devgeeks.org">
-		  Tommy-Carlos Williams
-	  </author>
+        Tommy-Carlos Williams
+    </author>
     <preference name="permissions" value="none" />
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
