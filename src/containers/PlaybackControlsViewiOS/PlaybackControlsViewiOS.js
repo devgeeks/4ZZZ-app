@@ -45,7 +45,6 @@ const PlaybackControlsViewiOS = React.createClass({
   setNowPlayingControls() {
     const { nowPlaying: { show: { name, broadcasters } } } = this.props;
     window.NowPlaying && window.NowPlaying.set({
-      //artwork: 'http://cart.4zzzfm.org.au/includes/templates/classic/images/4ZZZ_CIRC.png',
       artwork: 'http://ondemand.4zzzfm.org.au/img/4ZZZ_C_Blue_Rev.png',
       albumTitle: broadcasters,
       artist: name,
@@ -67,7 +66,7 @@ const PlaybackControlsViewiOS = React.createClass({
     this.audio.addEventListener('timeupdate', throttle(() => {
       this.setNowPlayingControls();
       dispatch(setAudioDuration(hhmmss(this.audio.currentTime)));
-    }, 1000), false);
+    }, 100), false);
     this.audio.addEventListener('error', (error) => {
       console.log('ERROR');
       console.error('error', error);
@@ -146,7 +145,7 @@ const PlaybackControlsViewiOS = React.createClass({
     } = this.props;
 
     // Default to the play button
-    let controls = <PlayButton handleClick={ this.handlePlaybackControlAction } />;
+    let controls;
     if (isPending) {
       controls = (
         <PendingButton handleClick={ this.handlePlaybackControlAction }>

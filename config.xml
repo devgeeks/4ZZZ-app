@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.devgeeks.fourtriplezed" ios-CFBundleIdentifier="org.devgeeks.4zzz" version="4.0.1" android-versionCode="400010" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget android-versionCode="400100" id="org.devgeeks.fourtriplezed" ios-CFBundleIdentifier="org.devgeeks.4zzz" version="4.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>4ZZZ</name>
     <description>
-      4ZZZ Radio App
-	  </description>
+        4ZZZ Radio App
+    </description>
     <author email="tommy@devgeeks.org" href="http://devgeeks.org">
-		  Tommy-Carlos Williams
-	  </author>
+        Tommy-Carlos Williams
+    </author>
     <preference name="permissions" value="none" />
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
@@ -16,6 +16,7 @@
     <preference name="android-installLocation" value="auto" />
     <preference name="BackgroundColor" value="0xff455a64" />
     <preference name="FadeSplashScreenDuration" value="300" />
+    <hook src="scripts/icons-hook.sh" type="after_platform_add" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -35,7 +36,6 @@
     </platform>
     <plugin name="cordova-plugin-whitelist" version="1" />
     <plugin name="nl.x-services.plugins.backgroundaudio" spec="https://github.com/EddyVerbruggen/cordova-plugin-backgroundaudio" />
-    <hook src="scripts/icons-hook.sh" type="after_platform_add" />
     <plugin name="cordova-plugin-splashscreen" spec="~3.1.0" />
     <plugin name="cordova-plugin-remotecommand" spec="~1.0.0" />
     <plugin name="cordova-plugin-nowplaying" spec="~1.0.0" />

@@ -12,11 +12,14 @@ import GuideDayView from 'containers/GuideDayView';
 //import GuideShowView from 'containers/GuideShowView';
 import configureStore from 'stores/configureStore';
 
-const offlineCheckUrl = 'http://4zzzfm.org.au:41021';
 import 'offline-js'; // sets up a global (ew)
 import 'offline-js/themes/offline-theme-dark.css';
 import 'offline-js/themes/offline-language-english.css';
 import './offline.css';
+
+import './index.css';
+
+const offlineCheckUrl = 'https://data.4zzz.org.au/grid/';
 window.Offline.options = {
   checks: {
     xhr: {
@@ -32,7 +35,13 @@ window.Offline.options = {
   game: false,
 };
 
-import './index.css';
+if (process.env.NODE_ENV === 'production') {
+  window.console = {
+    log: () => {},
+    error: () => {},
+    warn: () => {},
+  };
+}
 
 const store = configureStore();
 

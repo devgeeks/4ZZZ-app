@@ -64,7 +64,7 @@ const InfoView = React.createClass({
                 onClick={ this.handleAboutLinkClick }
                 href="https://twitter.com/theRealDevgeeks"
               >devgeeks</a>).
-            Even though moved away from Brisbane, I am a huge fan of
+            Even though no longer living in Brisbane, I am a huge fan of
             4ZZZ. I wrote the original 4ZZZ app many years ago when I was
             first getting into mobile app development but I sadly did not
             keep it as up to date as I should. It&#39;s now finally
@@ -79,10 +79,11 @@ const InfoView = React.createClass({
             <p>I am always happy to hear feedback about the app and
             suggestions of how to make it better.</p>
             <h2>Thanks</h2>
-            <p>Big thanks to Michelle Brown, long-time friend and station
-            manager. Thanks for letting me do this back when I had never released
-            an app before. It started me down a road I couldn&#39;t have
-            imagined at the time.</p>
+            <p>Huge thanks to Michelle Brown, long-time friend and station
+              manager for many years. Thanks for letting me do this back when
+              I had never released an app before. It started me down a road
+              I could not have imagined at the time.
+            </p>
           </div>
         </GuidePane>
       </div>
